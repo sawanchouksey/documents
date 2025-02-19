@@ -1,34 +1,34 @@
 ### Linux File Permissions Cheat Sheet
 
-![Linux Cheat Sheet](https://sawanchouksey.github.io/documents/blob/main/docs/Miscellaneous/media.jfif?raw=true)
+![Linux Cheat Sheet](https://github.com/sawanchouksey/documents/blob/main/docs/Miscellaneous/media.jfif?raw=true)
 
 ### Cloud Services Offering Comparing Chart
 
-![Cloud Compare](https://sawanchouksey.github.io/documents/blob/main/docs/Miscellaneous/cloudComapre.png?raw=true)
+![Cloud Compare](https://github.com/sawanchouksey/documents/blob/main/docs/Miscellaneous/cloudComapre.png?raw=true)
 
 ### Select Database service with different cloud provider
 
-![Cloud Database](https://sawanchouksey.github.io/documents/blob/main/docs/Miscellaneous/cloudDbChoose.jpg?raw=true)
+![Cloud Database](https://github.com/sawanchouksey/documents/blob/main/docs/Miscellaneous/cloudDbChoose.jpg?raw=true)
 
 ### Google Cloud Providing services cheatsheet
 
-![GCP cheat sheet](https://sawanchouksey.github.io/documents/blob/main/docs/Miscellaneous/GCPServiceCheatSheet.png?raw=true)
+![GCP cheat sheet](https://github.com/sawanchouksey/documents/blob/main/docs/Miscellaneous/GCPServiceCheatSheet.png?raw=true)
 
 ### AWS CICD with DevOps and security tools
 
-![cicd workflow](https://sawanchouksey.github.io/documents/blob/main/docs/Miscellaneous/aws-cicd-java-eks.png?raw=true)
+![cicd workflow](https://github.com/sawanchouksey/documents/blob/main/docs/Miscellaneous/aws-cicd-java-eks.png?raw=true)
 
 ### Azure DevOps with Azure App Services zero downtime
 
-![cicd workflow](https://sawanchouksey.github.io/documents/blob/main/docs/Miscellaneous/AzureDevOpsJava.drawio.png?raw=true)
+![cicd workflow](https://github.com/sawanchouksey/documents/blob/main/docs/Miscellaneous/AzureDevOpsJava.drawio.png?raw=true)
 
 ### AWS CICD  workflow with help of Jenkins within EKS with DevOps Security tools
 
-![cicd workflow](https://sawanchouksey.github.io/documents/blob/main/docs/Miscellaneous/CICD-workflow.drawio.png?raw=true)
+![cicd workflow](https://github.com/sawanchouksey/documents/blob/main/docs/Miscellaneous/CICD-workflow.drawio.png?raw=true)
 
 ### CICD Workflow with Jenkins and AKS with help of DevSecOps tools
 
-![cicd workflow](https://sawanchouksey.github.io/documents/blob/main/docs/Miscellaneous/cicd+Java+Docker+Azure.png?raw=true)
+![cicd workflow](https://github.com/sawanchouksey/documents/blob/main/docs/Miscellaneous/cicd+Java+Docker+Azure.png?raw=true)
 
 ##### Add image in MD file
 

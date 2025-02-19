@@ -29,7 +29,7 @@
 
 4. **Types of Data Structures**
    
-   - ![Data Structure Python](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/DataStructureInPython.png?raw=true)
+   - ![Data Structure Python](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/DataStructureInPython.png?raw=true)
 
 5. **Types of Algorithms**
    
@@ -69,7 +69,7 @@
    
    - Big O is Language and mertics we use to describe the effiency of algorithms.
    - **Time Complexity**: A way of showing how the runtime of function increase as the size of input increase.
-   - ![Big O Notation Graph](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/BigONotationGraph.png?raw=true)
+   - ![Big O Notation Graph](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/BigONotationGraph.png?raw=true)
 
 2. **Big O Notation - `Theta(Θ) - Average Case, Omega(Ω) - Best Case and Big O(Ο)- Worst Case`**
    These notations are fundamental concepts in algorithm analysis, helping to describe the performance characteristics of algorithms in terms of their time or space complexity as input size increases. They provide a standardized way to compare and analyze algorithms regardless of implementation details or specific hardware.
@@ -89,7 +89,7 @@
      - Definition: It is a complexity that is within bounds of the worst and the best cases.
      - This represents both upper and lower bounds on the growth rate of an algorithm.
    
-   - ![Big O Notation Performance Graph](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/bigOPerformanceMetricsGraph.png?raw=true)
+   - ![Big O Notation Performance Graph](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/bigOPerformanceMetricsGraph.png?raw=true)
 
 3. **Big O - O(1)** 
    
@@ -272,7 +272,7 @@
 
 9. **Runtime Complexity Graph**
    
-   - ![Run Time Complexity graph](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/BigORuntimeComplexityChrat.png?raw=true)
+   - ![Run Time Complexity graph](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/BigORuntimeComplexityChrat.png?raw=true)
 
 10. **Space Complexity O(n)**
     
@@ -295,7 +295,7 @@
         print(sum(3))
         ```
       
-      - ![Space Complexity O(n)](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/SpaceComplexityO(N).png?raw=true)
+      - ![Space Complexity O(n)](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/SpaceComplexityO(N).png?raw=true)
       
       - **Linked Lists**: A linked list with (N) elements will have (O(N)) space complexity, as each node requires space to store the data and a reference (or pointer) to the next node.
       
@@ -344,7 +344,7 @@
     
     - Example:
     
-    - ![Run Time Complexity graph](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/SpaceCompexityO(1).png?raw=true)
+    - ![Run Time Complexity graph](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/SpaceCompexityO(1).png?raw=true)
     
     - In this example, the algorithm only uses a fixed amount of memory to store the input number (n) and the result of the modulo operation, regardless of the value of (n). Thus, its space complexity is (O(1)).
     
@@ -352,7 +352,7 @@
 
 12. **How to measure the codes using Big O?**
     
-    - ![Code Measure Big O](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/CodeMeasureBigO.png?raw=true)
+    - ![Code Measure Big O](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/CodeMeasureBigO.png?raw=true)
 
 ### Arrays
 
@@ -493,7 +493,7 @@
    
    - **3D Array**: `array[i][j][k]`
    
-   - ![Types Of Array](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/TypesOfArray.png?raw=true)
+   - ![Types Of Array](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/TypesOfArray.png?raw=true)
 
 4. **Create an Array**
    
@@ -826,9 +826,9 @@
 11. **Insertion in 2D array**
     
     1. **Column insertion**
-    - ![Insert Column](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/insertionCloumn2dArray.png?raw=true)
+    - ![Insert Column](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/insertionCloumn2dArray.png?raw=true)
     2. **Row insertion**
-    - ![Insert Column](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/insertionRow2dArray.png?raw=true)
+    - ![Insert Column](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/insertionRow2dArray.png?raw=true)
     3. ```python
        #axis=0 for insertion in Row at 1st row where `1` is row index
        newTwoDArray = np.append(twoDArray, 1, [[1,2,3,4]], axis=0) 
@@ -838,7 +838,7 @@
 
 12. **Accessing Element in 2D array**
     
-    - ![Access Element in 2D array](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/accessElement2dArray.png?raw=true)
+    - ![Access Element in 2D array](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/accessElement2dArray.png?raw=true)
     1. **Column length**
     - ```
       len(array)
@@ -884,7 +884,7 @@
 
 16. **Time and Space Complexity of 2D Array**
     
-    - ![Complexity in 2D array](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/timeSpace2dArray.png?raw=true)
+    - ![Complexity in 2D array](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/timeSpace2dArray.png?raw=true)
 
 17. **When to use/avoid Array**
 
@@ -927,7 +927,7 @@ Using arrays can be beneficial, but there are specific scenarios where they're m
 
 19. **Time and Space Complexity of Lists**
     
-    - ![Complexity in 2D array](https://sawanchouksey.github.io/documents/blob/main/docs/DS&AlgoPython/timeSpaceComplexityList.png?raw=true)
+    - ![Complexity in 2D array](https://github.com/sawanchouksey/documents/blob/main/docs/DS&AlgoPython/timeSpaceComplexityList.png?raw=true)
 
 20. **List Comprehension & Conditional List Comprehensions**
     

@@ -1,6 +1,6 @@
 # AWS SSM Manager Integration for Docker-based Development Environments
 
-<img src="https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/ec2ssmdocker.png?raw=true" title="SSM Manager Integration" alt="SSM Manager Integration" data-align="center">
+<img src="https://github.com/sawanchouksey/documents/blob/main/docs/Cloud/ec2ssmdocker.png?raw=true" title="SSM Manager Integration" alt="SSM Manager Integration" data-align="center">
 
 This guide outlines the complete setup process for implementing AWS Systems Manager (SSM) for EC2 instances running containerized SIT and QA environments with Docker.
 
@@ -16,7 +16,7 @@ This guide outlines the complete setup process for implementing AWS Systems Mana
 2. Create 4 VPC endpoints with the **Interface** type for services like SSM, EC2, etc.
    - Select the required service names for each endpoint (for example, **com.amazonaws.region.ssm** for SSM).
    - Choose the correct VPC and subnet.
-   - <img src="https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/ssmendpoints.jpg?raw=true" title="SSMEndpoints" alt="SSMEndpoints">
+   - <img src="https://github.com/sawanchouksey/documents/blob/main/docs/Cloud/ssmendpoints.jpg?raw=true" title="SSMEndpoints" alt="SSMEndpoints">
 
 ### Step 2: Create Inbound Rule for HTTPS (443) for Security Group (SG)
 1. Go to **EC2** > **Security Groups**.

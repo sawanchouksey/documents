@@ -62,7 +62,7 @@
 2. Go to IAM role which is attached to Instance. 
 
 3. Attach CloudWatchAgentServerPolicy  to your Instance role.
-    ![CloudWatchAgentServerPolicy](https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/CloudWatchAgentServerPolicy.png?raw=true)
+    ![CloudWatchAgentServerPolicy](https://github.com/sawanchouksey/documents/blob/main/docs/Cloud/CloudWatchAgentServerPolicy.png?raw=true)
 
 4. Login to the EC2 Instance and install awslogs package
    
@@ -89,7 +89,7 @@
    vim awscli.conf
    ```
    
-    ![AwsCliConf](https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/awscli.png?raw=true)
+    ![AwsCliConf](https://github.com/sawanchouksey/documents/blob/main/docs/Cloud/awscli.png?raw=true)
 
 8. Then in the same directory make a change to awslogs.conf file. Add the below lines, make changes as per your need
    
@@ -104,7 +104,7 @@
    log_group_name = Nginx-logs
    ```
    
-    ![AwsLogsConf](https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/awslogsconf.png?raw=true)
+    ![AwsLogsConf](https://github.com/sawanchouksey/documents/blob/main/docs/Cloud/awslogsconf.png?raw=true)
 
 9. After these changes you have to restart awslogsd.service by using command
    
@@ -115,9 +115,9 @@
 10. Then go to your AWS management console > CloudWatch. When you will see the log groups. You’ll find the Nginx-logs log group automatically created and inside it log_stream will be created.
     
     - Log group
-        ![AwsCloudWatchLogGroup](https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/loggroup.png?raw=true)
+        ![AwsCloudWatchLogGroup](https://github.com/sawanchouksey/documents/blob/main/docs/Cloud/loggroup.png?raw=true)
     - Log Stream
-        ![AwsCloudWatchLogStream](https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/logstream.png?raw=true)
+        ![AwsCloudWatchLogStream](https://github.com/sawanchouksey/documents/blob/main/docs/Cloud/logstream.png?raw=true)
 
 
 ### Support Me

@@ -113,7 +113,7 @@ Here are some key benefits of Nginx:
     ls -lart
     ```
     
-    ![diagram](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/dynamic-installed-module.png?raw=true)
+    ![diagram](https://github.com/sawanchouksey/documents/blob/main/docs/DevOps/dynamic-installed-module.png?raw=true)
 
 14. lets configure the `nginx` as systemd service so we can controll `nginx` with `systemctl` commands in system.
 
@@ -179,10 +179,10 @@ Here are some key benefits of Nginx:
     ```
 
 20. If everything works fine as expected then simply browser the URL with `default port 80` or `configured port <port_no>` in browser or with the help of `curl request` as well
-    ![diagram](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/nginx-browser.png?raw=true)
+    ![diagram](https://github.com/sawanchouksey/documents/blob/main/docs/DevOps/nginx-browser.png?raw=true)
 
 21. Now lets check our `nginx server details` coming in header or not with curl request.
-    ![diagram](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/nginx-server-expose.png?raw=true)
+    ![diagram](https://github.com/sawanchouksey/documents/blob/main/docs/DevOps/nginx-server-expose.png?raw=true)
 
 22. As we noticed by default its exposing our `nginx server details` in internet which will help `hackers to find vulenrablities and exploit our server or application` deployed in nginx as well.
 
@@ -216,7 +216,7 @@ Here are some key benefits of Nginx:
     ```
 
 24. Lets again check now our server details will not be exposed and visible in internet
-    ![diagram](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/disable-nginx-server-expose.png?raw=true)
+    ![diagram](https://github.com/sawanchouksey/documents/blob/main/docs/DevOps/disable-nginx-server-expose.png?raw=true)
 
 25. Enable `Nginx Service` on autostart during reboot server
     
