@@ -1,6 +1,6 @@
 # Provide developers with secure access to the Kubernetes API server of a private Amazon EKS cluster for the purpose of troubleshooting and debugging cloud-deployed applications.
 
-![RequestFlowDiagram](https://github.com/sawan22071995/notes/blob/main/docs/Cloud/Nginx+KubeAPi.png?raw=true)
+![RequestFlowDiagram](https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/Nginx+KubeAPi.png?raw=true)
 
 ### Context:
 

@@ -37,7 +37,7 @@
      | <mark>**Driver**</mark> | **Docker**       | **Java**     | **Exec**         |
      | <mark>**Type**</mark>   | **Long Running** | **Periodic** | **Parametrized** |
      | <mark>**Volume**</mark> | **Yes**          | **No**       | -                |
-- ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/wl.png?raw=true)
+- ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/wl.png?raw=true)
 
 ### Nomad Components
 
@@ -62,7 +62,7 @@
    An HCL configuration file on disk which describe how a workload should be scheduled.
    It contains multiple stanza that defines configuration such as jobs, groups, tasks, services and resources for the application.
    
-   ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/job-specification-file.png?raw=true)
+   ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/job-specification-file.png?raw=true)
 
 5. Driver
    
@@ -79,7 +79,7 @@
    Execute these commands
    Run this Java application from .jar file
    
-   ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/task-example.png?raw=true)
+   ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/task-example.png?raw=true)
 
 7. Task Group
    
@@ -87,7 +87,7 @@
    Any task within the defined group will be placed on the same Nomad client.
    This is especially useful for applications that require low latency or have high throughput to another application on task group.
    
-   ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/task-group-example.png?raw=true)
+   ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/task-group-example.png?raw=true)
 
 8. Evaluation
    
@@ -102,11 +102,11 @@
 
 ### Nomad Supports multiple Task Driver Software
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/td.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/td.png?raw=true)
 
 ### Scheduling Workflow in Nomad
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/scheduling-workflow.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/scheduling-workflow.png?raw=true)
 
 ### Nomad Architecture
 
@@ -174,11 +174,11 @@ The Nomad client is responsible for running the actual tasks and jobs that are s
 
 ### Single Region Architecture
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/single-region-arch.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/single-region-arch.png?raw=true)
 
 ### Multi Region Architecture
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/multi-region-arch.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/multi-region-arch.png?raw=true)
 
 ### Comparing Nomad to Kubernetes
 
@@ -187,7 +187,7 @@ Nomad is primarily task-scheduling plateform and can't orchestrate load balancin
 Nomad can scale to millions of containers (check out the 1 million and 2 million
 container challenge HashiCorp did)
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/nomad-vs-k8s.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/nomad-vs-k8s.png?raw=true)
 
 ### Installing Nomad
 
@@ -657,7 +657,7 @@ Here are the general steps to register Nomad clients with a Nomad server:
   - 3-node cluster provides a failure tolerance of 1 node
   - 5-node cluster provides a failure tolerance of 2 nodes
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/5-node-arc.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/5-node-arc.png?raw=true)
 
 ### Raft Overview
 
@@ -671,7 +671,7 @@ Here are the general steps to register Nomad clients with a Nomad server:
 
 - A quorum must be maintained, otherwise, Nomad cannot process log entries or elect a leader – Nomad will be unavailable
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/raft.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/raft.png?raw=true)
 
             
 
@@ -680,15 +680,15 @@ Here are the general steps to register Nomad clients with a Nomad server:
 - Servers should be able to communicate over a high bandwidth, low latency network
 - Recommended to have <10ms latency between cluster members
 - Nomad servers can be spread across cloud regions or datacenters if they meet the latency requirements
-- ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/networking.png?raw=true)
+- ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/networking.png?raw=true)
 
 ### Nomad Networking Calls
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/net.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/net.png?raw=true)
 
 ### System Requirements For Nomad Servers(recommended)
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/system-require-recom.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/system-require-recom.png?raw=true)
 
 ### Joining Servers to a Cluster
 
@@ -879,11 +879,11 @@ Allows many teams and projects to share a single multi-region Nomad deployment w
 
 - Namespaces are automatically replicated across regions for easy, centralized administration at scale
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/namespace.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/namespace.png?raw=true)
 
 ### Enabling TLS Encryption
 
-- ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/tls.png?raw=true)
+- ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/tls.png?raw=true)
 
 - Prevent unauthorized access to Nomad
 
@@ -984,7 +984,7 @@ Allows many teams and projects to share a single multi-region Nomad deployment w
 
 ### Secure Nomad with ACLs
 
-- ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/acl.png?raw=true)
+- ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/acl.png?raw=true)
 
 - Token-based authentication
 
@@ -994,13 +994,13 @@ Allows many teams and projects to share a single multi-region Nomad deployment w
 
 - Policies and tokens are automatically replicated across regions for easy, centralized administration at scale
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/acl-components.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/acl-components.png?raw=true)
 
 - Nomad ACLs are NOT enabled by default and therefore the ACL must be bootstrapped before you can use them to secure Nomad
 
 - All servers must include the acl stanza and parameters in the agent config, otherwise you'll get an error message stating that ACL support is disabled
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/acl-steps.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/acl-steps.png?raw=true)
 
 - update server configuration file
   
@@ -1094,13 +1094,13 @@ Allows many teams and projects to share a single multi-region Nomad deployment w
   }
   ```
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/ns-policy.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/ns-policy.png?raw=true)
 
 ### Namespace Capablities
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/ns-capa.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/ns-capa.png?raw=true)
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/ns-capa-1.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/ns-capa-1.png?raw=true)
 
 - Interaction via CLI requires an ACL token to perform almost all operations
 
@@ -1121,7 +1121,7 @@ Allows many teams and projects to share a single multi-region Nomad deployment w
 
 ### Authenticate to the Nomad UI without exposing the token to the browser's history
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/acl-token-ui.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/acl-token-ui.png?raw=true)
 
 ### Interacting with Nomad
 
@@ -1158,7 +1158,7 @@ Allows many teams and projects to share a single multi-region Nomad deployment w
 
 3. Nomad SubCommands
    
-   ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/subcommand.png?raw=true)
+   ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/subcommand.png?raw=true)
    
    - All commands in the Nomad CLI start with nomad
    
@@ -1206,7 +1206,7 @@ Allows many teams and projects to share a single multi-region Nomad deployment w
   URL for web UI: https://nomad.example.com:4646
   ```
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/nomad-ui.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/nomad-ui.png?raw=true)
 
 - disable/enbale "Eligible" button icon at top below client name header client page
 
@@ -1223,7 +1223,7 @@ Allows many teams and projects to share a single multi-region Nomad deployment w
 
 - Additional information may be passed as a query parameter
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/api.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/api.png?raw=true)
 
 - If ACLs are enabled, a Nomad token must be provided when invoking an API
 
@@ -1273,7 +1273,7 @@ Allows many teams and projects to share a single multi-region Nomad deployment w
   
   - Tasks define the actual work that will be executed while the driver controls how the task is executed
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/job-spec-hier.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/job-spec-hier.png?raw=true)
 
 - Nomad Job Specification
   
@@ -1388,7 +1388,7 @@ Allows many teams and projects to share a single multi-region Nomad deployment w
 
 ### complete Job File for Nomad
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/job.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/job.png?raw=true)
 
 ### Running our first Nomad Job
 
@@ -1416,9 +1416,9 @@ Allows many teams and projects to share a single multi-region Nomad deployment w
   $ nomad job run plan [options] <file>
   ```
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/plan-pass.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/plan-pass.png?raw=true)
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/plan-fail.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/plan-fail.png?raw=true)
 
 - Ok, let's submit our tetris job with just a count of "1" which we know will work fine
   
@@ -1528,7 +1528,7 @@ $ nomad job stop -purge pytechco-web
 - When using spread, the scheduler will attempt to place allocations equally among the available values of the given target
 - Spread can be used at the job level and/or the group level
 - Spread can distribute tasks across datacenters if you have federated datacenters
-- ![alt text](https://github.com/sawan22071995/notes/blob/main/binpack.png?raw=true)
+- ![alt text](https://sawanchouksey.github.io/documents/blob/main/binpack.png?raw=true)
 
 ### server and raft configuration
 
@@ -1660,9 +1660,9 @@ server{
 
 ### Job Constraints Example
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/job-const.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/job-const.png?raw=true)
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/job-con.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/job-con.png?raw=true)
 
 ### Job Scaling
 
@@ -1697,7 +1697,7 @@ server{
 
 #### Host Mode
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/host-mode-demo.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/host-mode-demo.png?raw=true)
 
 - Access via host IP address and dynamically allocated port
 
@@ -1705,21 +1705,21 @@ server{
 
 - Relies on the task drivers to implement port mapping
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/host-mode.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/host-mode.png?raw=true)
 
-- ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/host-mode-1.png?raw=true)
+- ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/host-mode-1.png?raw=true)
 
-- ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/host-mode-2.png?raw=true)
+- ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/host-mode-2.png?raw=true)
 
 #### Bridge Mode
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/bridgw-mode-demo.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/bridgw-mode-demo.png?raw=true)
 
 - Access via host IP address and dynamically allocated port
 
 - Default port range is 20000 - 32000
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/bridgw-mode.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/bridgw-mode.png?raw=true)
 
 ### Working with Volumes
 
@@ -1739,9 +1739,9 @@ server{
   
   #### Host Volume
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/host-vol.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/host-vol.png?raw=true)
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/host-volume.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/host-volume.png?raw=true)
   
   #### CSI Volume
   
@@ -1774,7 +1774,7 @@ server{
     • vSphere
     ```
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/csi-vol-steps.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/csi-vol-steps.png?raw=true)
 
 ### Enable Priviledged Docker Jobs
 
@@ -1782,7 +1782,7 @@ server{
 
 - The default configuration does not allow privileged Docker jobs, so you must update your client configuration to permit them
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/doc-job.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/doc-job.png?raw=true)
 
 ### Create the Plugin Job
 
@@ -1794,7 +1794,7 @@ server{
   
   - These jobs use the csi_plugin stanza in the job spec file
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/plugin-job.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/plugin-job.png?raw=true)
 
 ### Deploy the Plugin Jobs to Nomad
 
@@ -1814,13 +1814,13 @@ server{
 - Each volume needs to be registered with Nomad to ensure the CSI plugins
   know about each volume
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/reg-vol.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/reg-vol.png?raw=true)
 
 ### Create the Job to Use the Volume
 
 - And….finally. Create the job for the task(s) that will consume the new CSI volume
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/vol-job.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/vol-job.png?raw=true)
 
 ### By default, the port range that Nomad will use for allocating dynamic ports on client hosts
 
@@ -1857,18 +1857,18 @@ server{
 
 You can view journal logs on Linux operating systems to view important information about the Nomad service. This is great for troubleshooting issues if Nomad won't start or if you think you have misconfigurations in your Nomad agent configuration
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/logs.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/logs.png?raw=true)
 
 Use the log_level and log_file parameters in the Nomad agent configuration file to
 output logs for Nomad.
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/logs-1.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/logs-1.png?raw=true)
 
 ### Getting Metrics from the API
 
 Nomad offers an API endpoint to return metrics for the current Nomad process
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/metrics.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/metrics.png?raw=true)
 
 ### Configuring Telemetry
 
@@ -1878,7 +1878,7 @@ performance metrics we can use to validate or forecast the resources of our clus
 To enable and use telemetry metrics, add the stanza to Nomad client and server
 configuration files to send metrics to Prometheus/Graphana, Splunk, DataDog, etc.
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/telemetry.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/telemetry.png?raw=true)
 
 ## Application Monitoring
 
@@ -1904,7 +1904,7 @@ All tasks in Nomad will automatically write logs when running on Nomad clients
 
 - You can change the maximum number of files Nomad will retain and the maximum size of those files
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/logs-alloc.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/logs-alloc.png?raw=true)
   
   ```
   $ ls
@@ -2062,7 +2062,7 @@ Nomad has built-in features that allow you to easily generate, install, use, and
 
 ### Critical Items for Upgrading
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/item-upg.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/item-upg.png?raw=true)
 
 ### Order of Operations (Rolling)
 
@@ -2072,11 +2072,11 @@ Nomad has built-in features that allow you to easily generate, install, use, and
 - Any new features (server and client) are unlikely to work correctly until all
   nodes in the cluster have been upgraded
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/upgrade.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/upgrade.png?raw=true)
 
 ### Order of Operations (In-Place)
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/upg.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/upg.png?raw=true)
 
 ### Support Me
 

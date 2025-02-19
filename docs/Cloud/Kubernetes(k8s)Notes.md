@@ -4,7 +4,7 @@
 
 ### K8s Archietecture Diagram
 
-![k8s Archietecture Diagram](https://github.com/sawan22071995/notes/blob/main/docs/Cloud/Kubernetes-Architecture-Diagram.jpg?raw=true)
+![k8s Archietecture Diagram](https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/Kubernetes-Architecture-Diagram.jpg?raw=true)
 
 ### Installation & Provisioning of Kubernetes
 

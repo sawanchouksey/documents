@@ -1,6 +1,6 @@
 # ♾️ DevOps CI/CD Project with Jenkins, Ansible and Kubernetes(AKS) ♾️
 
-![diagram](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/img.png?raw=true)
+![diagram](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/img.png?raw=true)
 
 ### ✍Create new Ubuntu Virtual Machine and install Jenkins in it.
 

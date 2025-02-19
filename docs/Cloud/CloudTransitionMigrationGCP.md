@@ -231,7 +231,7 @@
 
 ### Choose correct service for successfull migration.
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/Cloud/migrate.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/migrate.png?raw=true)
 
 ### 3. Move Data
 
@@ -241,7 +241,7 @@
 
 - Evaluate Transfer Methods
   
-  ![alt text](https://github.com/sawan22071995/notes/blob/main/docs/Cloud/data.png?raw=true)
+  ![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/data.png?raw=true)
 
 ### 4. Move Application
 

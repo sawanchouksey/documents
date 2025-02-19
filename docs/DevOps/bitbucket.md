@@ -415,11 +415,11 @@ pipelines:
 
 A fork creates a completely independent copy of Git repository. In contrast to a fork, a Git clone creates a linked copy that will continue to synchronize with the target repository.
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/clonevsfork.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/clonevsfork.png?raw=true)
 
 ### git fetch vs git pull?
 
-![alt text](https://github.com/sawan22071995/notes/blob/main/docs/DevOps/fetchpull.png?raw=true)
+![alt text](https://sawanchouksey.github.io/documents/blob/main/docs/DevOps/fetchpull.png?raw=true)
 
 ### sourceTree
 

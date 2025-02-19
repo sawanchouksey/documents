@@ -1,6 +1,6 @@
 # Google Cloud Platform (GCP) Notes
 
-<img src="https://github.com/sawan22071995/notes/blob/main/docs/Cloud/GCP.jpg?raw=true" title="" alt="alt text" data-align="center">
+<img src="https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/GCP.jpg?raw=true" title="" alt="alt text" data-align="center">
 
 **Google Cloud Platform (GCP)** is a suite of cloud computing services offered by Google that provides a variety of infrastructure and platform services for building, deploying and scaling applications and services.
 
