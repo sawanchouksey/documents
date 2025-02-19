@@ -1,6 +1,7 @@
 # AWS SSM Manager Integration for Docker-based Development Environments
 
-<img src="https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/ec2ssmdocker.png?raw=true" title="" alt="alt text" data-align="center">
+<img src="https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/ec2ssmdocker.png?raw=true" title="SSM Manager Integration" alt="SSM Manager Integration" data-align="center">
+
 This guide outlines the complete setup process for implementing AWS Systems Manager (SSM) for EC2 instances running containerized SIT and QA environments with Docker.
 
 ## Prerequisites
@@ -10,6 +11,58 @@ This guide outlines the complete setup process for implementing AWS Systems Mana
 
 ## Part 1: SSM Setup (Before Environment Deployment)
 
+### Step 1: Create 4 VPC Endpoints with Interface Endpoint Type
+1. In the AWS Management Console, navigate to **VPC** > **Endpoints**.
+2. Create 4 VPC endpoints with the **Interface** type for services like SSM, EC2, etc.
+   - Select the required service names for each endpoint (for example, **com.amazonaws.region.ssm** for SSM).
+   - Choose the correct VPC and subnet.
+   - <img src="https://sawanchouksey.github.io/documents/blob/main/docs/Cloud/ssmendpoints.jpg?raw=true" title="SSMEndpoints" alt="SSMEndpoints">
+
+### Step 2: Create Inbound Rule for HTTPS (443) for Security Group (SG)
+1. Go to **EC2** > **Security Groups**.
+2. Select your security group and add an inbound rule.
+   - Protocol: **HTTPS**
+   - Port range: **443**
+   - Source: **0.0.0.0/0** (or your specific source IP range)
+
+### Step 3: Create IAM Role for EC2 Instances with SSM Permissions
+1. Navigate to the **IAM Console** > **Roles** > **Create Role**.
+2. Select **AWS Service** and then **EC2** as the use case.
+3. Attach the following policies:
+   - `AmazonSSMManagedInstanceCore` (required for SSM)
+   - `AmazonEC2RoleforSSM` (optional for extended functionality)
+4. Name the role `EC2-Docker-SSM-Role` and click **Create Role**.
+
+### Step 4: Attach IAM Role to EC2 Instance
+1. When launching your EC2 instance, assign the **EC2-Docker-SSM-Role** IAM role.
+2. If the EC2 instance is already created, attach the IAM role using the EC2 console under **Actions** > **Security** > **Modify IAM Role**.
+
+### Step 5: Check and Install SSM Agent in EC2 Instance
+1. **If using Amazon Linux 2**: The SSM agent is pre-installed. You can verify its status:
+   ```bash
+   sudo systemctl status amazon-ssm-agent
+   ```
+2. **For non-Amazon Linux 2 instances**: You may need to manually install the SSM agent by running the following commands:
+   ```bash
+   sudo yum install -y https://amazon-ssm-<region>.s3.amazonaws.com/latest/linux_amd64/amazon-ssm-agent.rpm
+   sudo systemctl enable amazon-ssm-agent
+   sudo systemctl start amazon-ssm-agent
+   ```
+
+### Step 6: Create EC2 Instance Without SSH Port, Key Pair, or Public IP
+1. Launch an EC2 instance without enabling SSH (port 22) and without a key pair or public IP.
+2. Make sure the instance is in a private subnet or has no direct internet access.
+3. If there's an existing EC2 instance, delete any SSH keys, public IPs, or associated security groups for compliance.
+
+### Step 7: Reboot or Restart the EC2 Instance After Changes
+1. After making the changes (such as attaching IAM roles and configuring the instance), reboot the EC2 instance to apply the new configurations.
+2. This ensures the changes take effect properly.
+
+### Step 8: Wait for 5-10 Minutes for the SSM "Connect" Button to Appear in the Session Manager Console
+1. After rebooting, wait for **5-10 minutes** for the instance to appear in **Systems Manager** > **Session Manager** > **Managed Instances**.
+2. You should see the **Connect** button appear next to the instance once it's ready for use.
+
+## Part 2: SSM Setup (Before Environment Deployment)
 ### Step 1: Create IAM Role for SSM Access
 1. Navigate to the IAM console at [IAM Console](https://console.aws.amazon.com/iam/)
 2. Choose **Roles** > **Create Role**
@@ -63,6 +116,8 @@ This guide outlines the complete setup process for implementing AWS Systems Mana
    - Configure **KMS encryption** for session data
    - Set **Session timeout** to your organization's requirements
 4. Click **Save**
+
+---
 
 ## Part 2: Deploy Docker Environment Structure
 
