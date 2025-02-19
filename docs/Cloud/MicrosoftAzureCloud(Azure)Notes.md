@@ -3538,7 +3538,7 @@ az storage message peek --queue-name Qname.
 - To create a table:
 
 ```
-az storage table create --name sawan --account-name sawan --access-key VtYxwhnyjLaRrpMQFEGAamXxxycwm2rWBWgdEjIVvKjiGEjI6zbQad6CBzvVwwIOStlSKsssTJ6rHeZtcx+0tQ==
+az storage table create --name sawan --account-name sawan --access-key <Storage Account Access Key>
 ```
 
 - To delete a table:
@@ -3550,7 +3550,7 @@ az storage table delete --name tablename --account-name Accname --access-key Acc
 - To insert a storage entity into a table:
 
 ```
-az storage entity insert --connection-string DefaultEndpointsProtocol=http;AccountName=sawan;AccountKey=VtYxwhnyjLaRrpMQFEGAamXxxycwm2rWBWgdEjIVvKjiGEjI6zbQad6CBzvVwwIOStlSKsssTJ6rHeZtcx+0tQ==;EndpointSuffix=core.windows.net --entity PartitionKey=AAA RowKey=BBB Content=ASDF2 --table-name sawan
+az storage entity insert --connection-string DefaultEndpointsProtocol=http;AccountName=sawan;AccountKey=<Storage Account Access key>;EndpointSuffix=core.windows.net --entity PartitionKey=AAA RowKey=BBB Content=ASDF2 --table-name sawan
 ```
 
 - To update an existing entity:
