@@ -203,7 +203,7 @@ services:
     image: nginx:latest
     container_name: QA_Nginx
     ports:
-      - "8080:80"
+      - "8090:80"
     networks:
       - qa_bridge_network
     volumes:
