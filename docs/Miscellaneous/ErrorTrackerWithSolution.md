@@ -2,6 +2,63 @@
 
 ## Error
 
+```json
+{ "took": 1698, "timed_out": false, "_shards": { "total": 45, "successful": 44, "skipped": 44, "failed": 1, "failures": [ { "shard": 0, "index": "sawan-app-2025.02.24", "node": "jkfdskhfjsid-hfsdjfhjs", "reason":
+{ "type": "illegal_argument_exception", "reason": "The length of [log] field of [23787] doc of [sawan-app-2025.02.24] index has exceeded [1000000] - maximum allowed to be analyzed for highlighting. This maximum can be set by changing the [index.highlight.max_analyzed_offset] index level setting. For large texts, indexing with offsets or term vectors is recommended!" }
+```
+
+##### Explaination:
+We Are facing issue in `opensearch` dashboards in AWS while fetching or try to get logs on based on specific filter or string .
+
+##### Solution
+
+**Steps to reach the Query Editor in OpenSearch Dashboards:**
+
+1. Log in to `OpenSearch Dashboards`
+2. Click on the `menu icon (hamburger menu)` in the top left corner
+3. Look for and click on `Dev Tools` in the menu
+4. This will open the `Console interface` where you can run `queries` against your `OpenSearch` cluster
+5. Write your `queries` in the `left panel` and click the `play button` or use `Ctrl+Enter` to execute them
+6. Results will appear in the `right panel`
+
+**Queries in the console:**
+1. A basic search query:
+```
+GET _search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+```
+
+2. Settings update:
+```
+PUT /sawan-app-2025.02.24/_settings
+{ "index.highlight.max_analyzed_offset" : 3000000 }
+```
+
+3. Various GET requests for settings and information:
+```
+GET /sawan-app-2024.02.25/_settings
+GET /_cluster/settings
+GET /_cluster/health?pretty
+GET /_cat/indices?s=index
+GET _cat/shards?s=store
+GET /_template
+```
+
+
+5. More GET requests:
+```
+GET /_cat/allocation?v&s=disk.avail
+GET _template/sawan_field_config
+```
+
+The Dev Tools console is where you can directly interact with OpenSearch's REST API and run all the queries shown in the image.
+
+## Error
+
 ```
 kubectl logs <karpenter controller pod> -n karpenter
 ```
@@ -251,9 +308,9 @@ Error:
           at com.amazonaws.services.secretsmanager.AWSSecretsManagerClient.invoke(AWSSecretsManagerClient.java:2572)
           at com.amazonaws.services.secretsmanager.AWSSecretsManagerClient.executeGetSecretValue(AWSSecretsManagerClient.java:1205)
           at com.amazonaws.services.secretsmanager.AWSSecretsManagerClient.getSecretValue(AWSSecretsManagerClient.java:1177)
-          at com.axis.thanos.OneGlanceStatementApplication$Companion.getSecret(OneGlanceStatementApplication.kt:64)
-          at com.axis.thanos.OneGlanceStatementApplication$Companion.main(OneGlanceStatementApplication.kt:22)
-          at com.axis.thanos.OneGlanceStatementApplication.main(OneGlanceStatementApplication.kt)
+          at com.notes.sawan.sawanApplication$Companion.getSecret(sawanApplication.kt:64)
+          at com.notes.sawan.sawanApplication$Companion.main(sawanApplication.kt:22)
+          at com.notes.sawan.sawanApplication.main(sawanApplication.kt)
   
   Caused by: java.net.UnknownHostException: secretsmanager.ap-south-1.amazonaws.com
   
@@ -308,7 +365,7 @@ We are using `EKS for application deployment` and `Istio for Service Mesh` for i
 ## Error
 
 cache: timed out waiting for the condition
-  Warning  Failed            23m                  kubelet             Failed to pull image "artifactory.axisb.com/thanos-docker-local/istio/proxyv2:1.20.0": rpc error: code = Unknown desc = failed to pull and unpack image "artifactory.axisb.com/thanos-docker-local/istio/proxyv2:1.20.0": failed to extract layer sha256:256d88da41857db513b95b50ba9a9b28491b58c954e25477d5dad8abb465430b: failed to unmount /var/lib/containerd/tmpmounts/containerd-mount2008772348: failed to unmount target /var/lib/containerd/tmpmounts/containerd-mount2008772348: device or resource busy: unknown
+  Warning  Failed            23m                  kubelet             Failed to pull image "artifactory.notesb.com/sawan-docker-local/istio/proxyv2:1.20.0": rpc error: code = Unknown desc = failed to pull and unpack image "artifactory.notesb.com/sawan-docker-local/istio/proxyv2:1.20.0": failed to extract layer sha256:256d88da41857db513b95b50ba9a9b28491b58c954e25477d5dad8abb465430b: failed to unmount /var/lib/containerd/tmpmounts/containerd-mount2008772348: failed to unmount target /var/lib/containerd/tmpmounts/containerd-mount2008772348: device or resource busy: unknown
 
 ##### Explanation:
 
@@ -370,7 +427,7 @@ RUN update-ca-certificates
 failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server could not find the requested resource (get pods.metrics.k8s.io)
 
 ```
-kubectl get hpa -n uat-app | grep app-test
+kubectl get hpa -n sawan-app | grep app-test
 app-test               Deployment/app-test              <unknown>/70%, <unknown>/70%   1         3         1          142d
 ```
 
@@ -430,7 +487,7 @@ This error typically occurs when the Metrics Server is not properly installed or
   
   ```
   kubectl top nodes
-  kubectl get hpa -n uat-app | grep app-test
+  kubectl get hpa -n sawan-app | grep app-test
   app-test               Deployment/app-test              3%/70%, 23%/70%   1         3         1          142d
   ```
 
