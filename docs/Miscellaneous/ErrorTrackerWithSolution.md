@@ -35,7 +35,19 @@ GET _search
 2. Settings update:
 ```
 PUT /sawan-app-2025.02.24/_settings
-{ "index.highlight.max_analyzed_offset" : 3000000 }
+{ 
+  "index.highlight.max_analyzed_offset" : 3000000 
+}
+```
+
+```
+PUT _template/*
+{
+  "index_patterns": ["sawan-app-*"],
+  "settings": {
+    "index.highlight.max_analyzed_offset": 3000000
+  }
+}
 ```
 
 3. Various GET requests for settings and information:
