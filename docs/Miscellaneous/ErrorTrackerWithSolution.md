@@ -35,6 +35,15 @@ GET _search
 2. Settings update:
 
 ```
+PUT /370844-2023*/_settings
+{
+  "index" : {
+    "highlight.max_analyzed_offset" : 3000000
+  }
+}
+```
+
+```
 PUT /_index_template/template_370844
 {
   "index_patterns" : ["370844-2023*"],
