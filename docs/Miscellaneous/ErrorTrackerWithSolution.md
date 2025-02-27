@@ -33,19 +33,16 @@ GET _search
 ```
 
 2. Settings update:
-```
-PUT /sawan-app-2025.02.24/_settings
-{ 
-  "index.highlight.max_analyzed_offset" : 3000000 
-}
-```
 
 ```
-PUT _template/*
+PUT /_index_template/template_370844
 {
-  "index_patterns": ["sawan-app-*"],
-  "settings": {
-    "index.highlight.max_analyzed_offset": 3000000
+  "index_patterns" : ["370844-2023*"],
+  "priority" : 1,
+  "template": {
+    "settings" : {
+      "highlight.max_analyzed_offset" : 3000000
+    }
   }
 }
 ```
