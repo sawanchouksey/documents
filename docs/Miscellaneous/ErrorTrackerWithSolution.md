@@ -48,6 +48,7 @@ PUT /_index_template/template_370844
 ```
 
 3. Various GET requests for settings and information:
+
 ```
 GET /sawan-app-2024.02.25/_settings
 GET /_cluster/settings
@@ -55,6 +56,7 @@ GET /_cluster/health?pretty
 GET /_cat/indices?s=index
 GET _cat/shards?s=store
 GET /_template
+PUT /_index_template/template_370844
 ```
 
 
