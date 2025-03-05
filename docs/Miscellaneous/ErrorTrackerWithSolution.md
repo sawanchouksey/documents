@@ -1,6 +1,89 @@
 # Here you will get most of the Error with solution what we faced daily day to day life as a Cloud or devOps Engineer
 
 ## Error
+Warning  FailedAddFinalizer  5m25s (x11 over 5m31s)  ingress  Failed add finalizer due to Internal error occurred: failed calling webhook "vingress.elbv2.k8s.aws": failed to call webhook: Post "https://aws-load-balancer-webhook-service.alb-controller.svc:443/validate-networking-v1-ingress?timeout=10s": no endpoints available for service "aws-load-balancer-webhook-service"
+
+##### Explaination:
+We are facing issue deploying `alb ingress controller` with helm charts and trying to deploy ingress with ACM certificate but not defined TLS secret in ingress file.
+
+##### Solution
+- update the ingress file with `tls secret details for https prtocol 443`
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-alb-ingress
+  namespace: test-hub
+  annotations:
+    # ALB Scheme - Choose 'internet-facing' for external access, 'internal' for internal access only
+    alb.ingress.kubernetes.io/scheme: internal
+
+    # Name of the ALB - Helps in identifying the ALB in AWS console
+    alb.ingress.kubernetes.io/load-balancer-name: test-alb
+
+    # Specify the subnets where the ALB should be deployed (should be in the same VPC as EKS)
+    alb.ingress.kubernetes.io/subnets: subnet-1,subnet-2  # Replace with actual subnet IDs
+
+    # Security groups to be attached to the ALB
+    alb.ingress.kubernetes.io/security-groups: sg-1,sg-2  # Replace with actual security group IDs
+
+    # Target type - 'ip' for pod-level routing, 'instance' for EC2-based routing
+    alb.ingress.kubernetes.io/target-type: ip
+
+    # ALB Listener Ports - Supports HTTP, HTTPS, and WSS (WebSockets Secure)
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS": 443}]'
+
+    # SSL Certificate ARN for HTTPS - Replace with an actual AWS ACM certificate ARN
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:123456789012:certificate/2cf92358-eaf0-43dc-98d2-fb1bbf397db3
+
+    # SSL Policy for security - Defines TLS settings
+    alb.ingress.kubernetes.io/ssl-policy: ELBSecurityPolicy-2016-08
+
+    # Redirect all HTTP traffic to HTTPS
+    alb.ingress.kubernetes.io/ssl-redirect: "443"
+
+    # Enable WebSockets Support (WSS) - Important for real-time applications
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/backend-protocol-version: HTTP2  # Enables WSS & HTTP/2 support
+
+    # Health Check Configuration
+    alb.ingress.kubernetes.io/healthcheck-path: /healthz  # Path used for health checks
+    alb.ingress.kubernetes.io/healthcheck-port: traffic-port  # Uses the same port as incoming traffic
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP  # Can be HTTP or HTTPS
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "30"  # Frequency of health checks
+    alb.ingress.kubernetes.io/success-codes: "200-399"  # Defines what is considered a healthy response
+
+    # Enable ALB deletion protection to prevent accidental deletion
+    alb.ingress.kubernetes.io/enable-deletion-protection: "true"
+
+    # Web Application Firewall (WAF) - Enable if needed
+    alb.ingress.kubernetes.io/enable-waf: "false"
+
+    # Grouping ALB Ingress resources for multiple applications sharing the same ALB
+    alb.ingress.kubernetes.io/group.name: test-alb-group
+    alb.ingress.kubernetes.io/group.order: "10"
+
+spec:
+  ingressClassName: alb  # Specifies that this Ingress should use the AWS ALB controller
+  tls:
+    - hosts:
+        - ui-lb.dev.test.sawan.com
+      secretName: test-tls-credential-wild
+  rules:
+    - host: ui-lb.dev.test.sawan.com  # Replace with your domain
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: test-app
+                port:
+                  number: 80  
+```
+
+## Error
 
 ```json
 { "took": 1698, "timed_out": false, "_shards": { "total": 45, "successful": 44, "skipped": 44, "failed": 1, "failures": [ { "shard": 0, "index": "sawan-app-2025.02.24", "node": "jkfdskhfjsid-hfsdjfhjs", "reason":
@@ -196,9 +279,9 @@ Update the archietecture type with respect to `sam-cli` archietecture i.e if its
 ```
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: An AWS Serverless Application Model template for arn:aws:lambda:ap-south-1:516638134243:function:axaws-cerebro-dev-knowledgebase-function function.
+Description: An AWS Serverless Application Model template for arn:aws:lambda:ap-south-1:123456789012:function:axaws-test-dev-knowledgebase-function function.
 Resources:
-  axawscerebrodevknowledgebasefunction:
+  axawstestdevknowledgebasefunction:
     Type: AWS::Serverless::Function
     Properties:
       CodeUri: .
@@ -233,14 +316,14 @@ Resources:
         UpdateRuntimeOn: Auto
 
 Outputs:
-  axawscerebrodevknowledgebasefunction:
+  axawstestdevknowledgebasefunction:
     Description: "Lambda Function ARN"
-    Value: !GetAtt axawscerebrodevknowledgebasefunction.Arn
+    Value: !GetAtt axawstestdevknowledgebasefunction.Arn
 ```
 
 ## Error
 
-Error: Failed to create changeset for the stack: axaws-cerebro-dev-knowledgebase-function, ex: Waiter ChangeSetCreateComplete failed: Waiter encountered a terminal failure state: For expression "Status" we matched expected path: "FAILED" Status: FAILED. Reason: User: arn:aws:sts::516638134243:assumed-role/axaws-cerebro-jenkins-dev-crossaccount-role/xactarget is not authorized to perform: cloudformation:CreateChangeSet on resource: arn:aws:cloudformation:ap-south-1:aws:transform/Serverless-2016-10-31 because no identity-based policy allows the cloudformation:CreateChangeSet action
+Error: Failed to create changeset for the stack: axaws-test-dev-knowledgebase-function, ex: Waiter ChangeSetCreateComplete failed: Waiter encountered a terminal failure state: For expression "Status" we matched expected path: "FAILED" Status: FAILED. Reason: User: arn:aws:sts::123456789012:assumed-role/axaws-test-jenkins-dev-crossaccount-role/xactarget is not authorized to perform: cloudformation:CreateChangeSet on resource: arn:aws:cloudformation:ap-south-1:aws:transform/Serverless-2016-10-31 because no identity-based policy allows the cloudformation:CreateChangeSet action
 
 ##### Explanation:
 
