@@ -24,6 +24,7 @@
   - [k8s+HPA+Replica+Increase+Automation+Monitoring](DevOps/k8sHpaAutomation.md)
   - [bash+script+reference](DevOps/bash+script+reference.md)
   - [cicd+Jenkins+Ansible+k8s](DevOps/cicd+Jenkins+Ansible+k8s.md)
+  - [Playwright+Code+Docs](DevOps/PlaywrightDocs.md)
   - [Git](DevOps/Git.md)
   - [Bitbukcet](DevOps/bitbucket.md)
   - [Nginx+Troubleshooting](DevOps/nginx-troubleshooting.md)
