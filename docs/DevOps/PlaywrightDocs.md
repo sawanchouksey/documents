@@ -1,4 +1,6 @@
-🚀 **Exciting Milestone: Mastering Playwright Automation Testing!** 🚀
+#  🚀 Exciting Milestone: Mastering Playwright Automation Testing! 🚀
+
+![Playwright](https://github.com/sawanchouksey/documents/blob/main/docs/DevOps/Playwright.png?raw=true)
 
 🎓 **Learning Journey:**
 What an exciting and insightful experience it's been! From understanding the fundamentals of Playwright to exploring its advanced features, I’ve gained a deeper appreciation for its capabilities. I’ve had the opportunity to work with:
