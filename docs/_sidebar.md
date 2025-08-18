@@ -30,6 +30,7 @@
   - [Nginx+Troubleshooting](DevOps/nginx-troubleshooting.md)
   - [Linux+Command+Notes](DevOps/Linux+Command+Notes.md)
   - [Windows+Command+Notes](DevOps/Windows+Command+Notes.md)
+  - [MS+SQL+Server+DB](DevOps/ms+sql+server+db.md)
   - [SQLServer+Restore+EncrptedDB+Backup](DevOps/restore+SQLServer+.bak+TDEencryption+database.md)
   - [PostgreSQL+RDBMS+Notes](DevOps/RDBMS+Postgresql+Query.md)
   - [nomad](DevOps/nomad.md)
