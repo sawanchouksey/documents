@@ -26,6 +26,7 @@
   - [cicd+Jenkins+Ansible+k8s](DevOps/cicd+Jenkins+Ansible+k8s.md)
   - [Playwright+Code+Docs](DevOps/PlaywrightDocs.md)
   - [Git](DevOps/Git.md)
+  - [Github+Action+Workflow](DevOps/GitHubAction.md)
   - [Bitbukcet](DevOps/bitbucket.md)
   - [Nginx+Troubleshooting](DevOps/nginx-troubleshooting.md)
   - [Linux+Command+Notes](DevOps/Linux+Command+Notes.md)
