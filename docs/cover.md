@@ -1,27 +1,9 @@
-# **👨‍💻Cloud and DevOps Documentation👩‍💻**
+<!-- Cover Page -->
 
-##### [Fiverr Profile](https://www.fiverr.com/sawanchouksey?public_mode=true)
+# Cloud & DevOps Docs
 
-##### [Personal Profile](https://sawanchouksey.github.io/sawanchouksey/)
+> A comprehensive knowledge base covering Cloud Platforms, DevOps Tooling, Infrastructure as Code, Monitoring, and Data Structures - all in one place.
 
-## This is a place for information about all DevOps and Cloud related topics
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-##### Scroll Down Click on hamburger menu (≡) for all available documents and information
-
-# ⬇
-
-### 
+[Get Started](README.md)
+[Fiverr Profile](https://www.fiverr.com/sawanchouksey?public_mode=true)
+[Portfolio](https://sawanchouksey.github.io/sawanchouksey/)

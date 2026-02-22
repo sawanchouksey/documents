@@ -1,0 +1,1757 @@
+/* ============================================================
+   CloudOps Docs -- Custom Premium Theme
+   Dark mode via [data-theme="dark"], Light is default
+   ============================================================ */
+
+/* == CSS Variables == */
+:root {
+  --color-primary: #5C6BC0;
+  --color-primary-light: #7986CB;
+  --color-primary-glow: rgba(92, 107, 192, 0.35);
+  --color-accent: #00E5FF;
+  --color-accent-glow: rgba(0, 229, 255, 0.2);
+
+  /* Light mode */
+  --bg-body: #f5f7fb;
+  --bg-sidebar: #ffffff;
+  --bg-content: #f5f7fb;
+  --bg-code: #f0f2f8;
+  --bg-pre: #1e2030;
+  --bg-table-alt: #f0f4ff;
+  --bg-card: #ffffff;
+  --border-color: #e0e4f0;
+  --text-body: #2c3a52;
+  --text-sidebar: #3a4660;
+  --text-muted: #7a8aaa;
+  --text-heading: #1a2540;
+  --text-code-inline: #d63d6b;
+  --text-pre: #cdd6f4;
+  --shadow-sm: 0 1px 4px rgba(30, 40, 80, 0.08);
+  --shadow-md: 0 4px 24px rgba(30, 40, 80, 0.12);
+  --shadow-lg: 0 8px 40px rgba(30, 40, 80, 0.16);
+  --scrollbar-thumb: rgba(92, 107, 192, 0.3);
+  --sidebar-width: 300px;
+  --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --bg-body: #0d1117;
+  --bg-sidebar: #161b22;
+  --bg-content: #0d1117;
+  --bg-code: #1c2333;
+  --bg-pre: #161b22;
+  --bg-table-alt: #1c2333;
+  --bg-card: #161b22;
+  --border-color: #21262d;
+  --text-body: #c9d1d9;
+  --text-sidebar: #8b949e;
+  --text-muted: #6e7681;
+  --text-heading: #e6edf3;
+  --text-code-inline: #ff7b72;
+  --text-pre: #cdd6f4;
+  --shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 24px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.6);
+  --scrollbar-thumb: rgba(92, 107, 192, 0.4);
+}
+
+/* == Base Reset == */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+body {
+  background-color: var(--bg-body) !important;
+  color: var(--text-body) !important;
+  font-family: 'Inter', 'Lato', 'Helvetica Neue', Arial, sans-serif !important;
+  font-size: 15px;
+  line-height: 1.7;
+  transition: background-color var(--transition), color var(--transition);
+}
+
+/* ================================================================
+   DARK MODE TOGGLE  --  top-right pill button
+   ================================================================ */
+#theme-toggle {
+  position: fixed;
+  top: 14px;
+  right: 20px;
+  z-index: 100001;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  padding: 6px 14px 6px 10px;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition);
+  font-family: 'Inter', sans-serif;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-body);
+  text-decoration: none;
+  user-select: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+#theme-toggle:hover {
+  box-shadow: var(--shadow-md), 0 0 0 2px var(--color-primary-glow);
+  border-color: var(--color-primary);
+  transform: translateY(-1px);
+}
+
+#theme-toggle .toggle-icon {
+  font-size: 15px;
+  transition: transform 0.4s ease;
+  line-height: 1;
+}
+
+#theme-toggle:hover .toggle-icon {
+  transform: rotate(20deg) scale(1.15);
+}
+
+#theme-toggle .toggle-label {
+  color: var(--text-muted);
+  letter-spacing: 0.02em;
+}
+
+/* ================================================================
+   SOCIAL ICON BAR  --  fixed top-right, left of theme toggle
+   ================================================================ */
+#social-bar {
+  position: fixed;
+  top: 10px;
+  right: 20px;
+  /* will be pushed left by JS-calculated offset, handled via CSS below */
+  z-index: 100000;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 50px;
+  padding: 5px 8px;
+  box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background var(--transition), border-color var(--transition), box-shadow var(--transition);
+}
+
+#social-bar:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Individual icon button */
+.social-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: var(--text-muted);
+  text-decoration: none !important;
+  border: none;
+  background: transparent;
+  transition: color 0.18s ease, background 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+  flex-shrink: 0;
+}
+
+.social-icon svg {
+  width: 15px;
+  height: 15px;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.social-icon:hover {
+  transform: translateY(-2px) scale(1.15);
+  border-bottom: none !important;
+}
+
+.social-icon:hover svg {
+  transform: scale(1.08);
+}
+
+/* Per-brand hover colors */
+#icon-fiverr:hover {
+  color: #1dbf73;
+  background: rgba(29, 191, 115, 0.12);
+  box-shadow: 0 2px 10px rgba(29, 191, 115, 0.25);
+}
+
+#icon-github:hover {
+  color: var(--text-heading);
+  background: rgba(139, 148, 158, 0.15);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#icon-portfolio:hover {
+  color: var(--color-primary);
+  background: var(--color-primary-glow);
+  box-shadow: 0 2px 10px var(--color-primary-glow);
+}
+
+#icon-linkedin:hover {
+  color: #0A66C2;
+  background: rgba(10, 102, 194, 0.12);
+  box-shadow: 0 2px 10px rgba(10, 102, 194, 0.25);
+}
+
+#icon-instagram:hover {
+  color: #E4405F;
+  background: rgba(228, 64, 95, 0.12);
+  box-shadow: 0 2px 10px rgba(228, 64, 95, 0.25);
+}
+
+/* Divider between social bar and theme toggle */
+#social-bar::after {
+  content: '';
+  width: 1px;
+  height: 18px;
+  background: var(--border-color);
+  margin-left: 6px;
+  border-radius: 1px;
+  display: none;
+  /* hidden since they're separate elements */
+}
+
+/* Push theme toggle to the LEFT of the social bar */
+#theme-toggle {
+  right: calc(20px + 164px + 12px);
+  /* social-bar width â‰ˆ 164px + gap */
+}
+
+/* Mobile: stack or simplify */
+@media (max-width: 768px) {
+  #social-bar {
+    top: 8px;
+    right: 8px;
+    padding: 4px 6px;
+    gap: 0;
+  }
+
+  .social-icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .social-icon svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  #theme-toggle {
+    top: 8px;
+    right: 8px;
+    display: none;
+    /* on very small screens, hide toggle; social bar stays */
+  }
+}
+
+/* ================================================================
+   SIDEBAR
+   ================================================================ */
+.sidebar {
+  background: var(--bg-sidebar) !important;
+  border-right: 1px solid var(--border-color) !important;
+  box-shadow: 2px 0 24px rgba(0, 0, 0, 0.18) !important;
+  transition: background var(--transition), border-color var(--transition) !important;
+  padding-top: 16px !important;
+}
+
+/* Brand header */
+.sidebar>h1 {
+  padding: 12px 20px 18px !important;
+  margin: 0 0 0 0 !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.03em !important;
+  color: var(--color-primary) !important;
+  border-bottom: 1px solid var(--border-color);
+  position: relative;
+  background: linear-gradient(180deg, rgba(92, 107, 192, 0.06) 0%, transparent 100%);
+}
+
+.sidebar>h1 a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit !important;
+  text-decoration: none !important;
+}
+
+.sidebar>h1 a img {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  box-shadow: 0 0 0 2px var(--border-color), 0 0 18px var(--color-primary-glow);
+  transition: box-shadow var(--transition), transform var(--transition);
+  flex-shrink: 0;
+}
+
+.sidebar>h1 a img:hover {
+  box-shadow: 0 0 0 2px var(--color-primary), 0 0 28px var(--color-primary-glow);
+  transform: scale(1.06) rotate(-2deg);
+}
+
+/* Site name text in brand header */
+.sidebar>h1 a span,
+.sidebar>h1 a:not(:has(img)) {
+  line-height: 1.25;
+}
+
+/* Gradient glow underline */
+.sidebar>h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--color-primary) 50%, transparent 100%);
+  opacity: 0.4;
+  transition: opacity var(--transition);
+}
+
+.sidebar>h1:hover::after {
+  opacity: 0.9;
+}
+
+
+/* Section labels */
+.sidebar ul>li>p {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  color: var(--text-muted) !important;
+  margin: 18px 0 4px 0 !important;
+  padding-left: 8px;
+}
+
+/* Nav links */
+.sidebar ul li a {
+  color: var(--text-sidebar) !important;
+  font-size: 13px !important;
+  border-radius: 7px;
+  padding: 5px 10px;
+  margin: 1px 8px 1px 4px;
+  transition: background var(--transition), color var(--transition), transform var(--transition) !important;
+  display: block;
+  font-weight: 400;
+  position: relative;
+  overflow: hidden;
+}
+
+.sidebar ul li a::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--color-primary);
+  transform: scaleY(0);
+  transition: transform 0.2s ease;
+}
+
+.sidebar ul li a:hover::before {
+  transform: scaleY(1);
+}
+
+.sidebar ul li a:hover {
+  background: var(--color-primary-glow) !important;
+  color: var(--color-primary-light) !important;
+  text-decoration: none !important;
+  transform: translateX(2px);
+  padding-left: 13px;
+}
+
+.sidebar ul li.active>a {
+  background: var(--color-primary-glow) !important;
+  color: var(--color-primary) !important;
+  font-weight: 600 !important;
+  padding-left: 13px;
+}
+
+.sidebar ul li.active>a::before {
+  transform: scaleY(1);
+}
+
+/* Search box */
+.search {
+  padding: 0 16px 16px;
+}
+
+.search input {
+  background: var(--bg-code) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  color: var(--text-body) !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  outline: none !important;
+  padding: 8px 12px !important;
+  transition: border-color var(--transition), box-shadow var(--transition) !important;
+  width: 100% !important;
+}
+
+.search input:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px var(--color-primary-glow) !important;
+}
+
+.search .results-panel {
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 10px !important;
+  box-shadow: var(--shadow-lg) !important;
+  margin-top: 8px !important;
+}
+
+.search .results-panel a {
+  border-bottom: 1px solid var(--border-color) !important;
+  color: var(--text-body) !important;
+  padding: 12px 16px !important;
+}
+
+.search .results-panel a:hover {
+  background: var(--color-primary-glow) !important;
+}
+
+.search .search-keyword,
+.search a:hover {
+  color: var(--color-primary) !important;
+}
+
+/* ================================================================
+   SIDEBAR TOGGLE
+   ================================================================
+   The toggle stays at BODY LEVEL (Docsify default, outside sidebar).
+   IMPORTANT: Sidebar closes via transform: translateX(-300px).
+   A transformed parent breaks position:fixed for children.
+   So the toggle MUST remain outside the sidebar DOM â€” we only use
+   position:fixed coordinates to position it visually near the search.
+   ================================================================ */
+
+/* OPEN STATE â€” visually sits inside sidebar, aligned with search box */
+.sidebar-toggle {
+  position: fixed !important;
+  top: 110px !important;
+  /* vertically aligned with search input */
+  left: 283px !important;
+  /* 300 - 17: straddles the sidebar right border */
+  bottom: auto !important;
+  right: auto !important;
+  width: 34px !important;
+  height: 34px !important;
+  padding: 0 !important;
+  background: var(--bg-sidebar) !important;
+  border: 1.5px solid var(--border-color) !important;
+  border-radius: 50% !important;
+  /* outer ring creates "punched out of the sidebar" look */
+  box-shadow: var(--shadow-md), 0 0 0 3px var(--bg-body) !important;
+  z-index: 200 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 4px !important;
+  cursor: pointer !important;
+  transition:
+    left 0.25s ease,
+    background var(--transition),
+    box-shadow var(--transition),
+    transform 0.2s ease !important;
+}
+
+.sidebar-toggle:hover {
+  background: var(--color-primary-glow) !important;
+  border-color: var(--color-primary) !important;
+  box-shadow: var(--shadow-md), 0 0 0 3px var(--bg-body), 0 0 14px var(--color-primary-glow) !important;
+  transform: scale(1.1) !important;
+}
+
+/* Three hamburger bars */
+.sidebar-toggle span {
+  background-color: var(--color-primary) !important;
+  display: block !important;
+  width: 14px !important;
+  height: 1.5px !important;
+  border-radius: 2px !important;
+  transition: all 0.28s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  margin: 0 !important;
+  transform-origin: center !important;
+}
+
+/* ----------------------------------------------------------------
+   CLOSED STATE â€” half-pill tab visible at left viewport edge
+   position:fixed still works here because toggle is at body level
+   ---------------------------------------------------------------- */
+body.close .sidebar-toggle {
+  position: fixed !important;
+  top: 50% !important;
+  left: 0 !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: translateY(-50%) !important;
+  /* half-pill shape */
+  border-radius: 0 50% 50% 0 !important;
+  width: 32px !important;
+  height: 52px !important;
+  border-left: none !important;
+  background: var(--color-primary) !important;
+  box-shadow: 3px 0 20px rgba(0, 0, 0, 0.35), 0 0 0 2px rgba(92, 107, 192, 0.3) !important;
+  gap: 0 !important;
+  /* Pulse animation to draw attention */
+  animation: pillPulse 2.4s ease-in-out infinite !important;
+}
+
+@keyframes pillPulse {
+
+  0%,
+  100% {
+    box-shadow: 3px 0 20px rgba(0, 0, 0, 0.35), 0 0 0 0px rgba(92, 107, 192, 0.5);
+  }
+
+  50% {
+    box-shadow: 3px 0 20px rgba(0, 0, 0, 0.35), 0 0 0 6px rgba(92, 107, 192, 0);
+  }
+}
+
+/* Hide the three bars in closed state */
+body.close .sidebar-toggle span {
+  opacity: 0 !important;
+  width: 0 !important;
+}
+
+/* Chevron â€º inside the pill, pointing right = "expand" */
+body.close .sidebar-toggle::before {
+  content: '\203A';
+  position: absolute;
+  inset: 0;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 1;
+  color: #ffffff;
+  font-family: 'Inter', Georgia, sans-serif;
+  margin: 0;
+  padding-left: 2px;
+  transition: transform 0.2s ease;
+}
+
+body.close .sidebar-toggle:hover {
+  background: var(--color-primary-light) !important;
+  transform: translateY(-50%) translateX(5px) !important;
+  animation: none !important;
+}
+
+body.close .sidebar-toggle:hover::before {
+  transform: translateX(3px);
+}
+
+/* Bar wrapper */
+.sidebar-toggle .sidebar-toggle-button {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 4px !important;
+  align-items: center !important;
+}
+
+/* â”€â”€ OPEN tooltip: "HIDE" badge fades in below â”€â”€ */
+.sidebar-toggle::after {
+  content: 'hide sidebar';
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  padding: 3px 8px;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  transition: opacity 0.2s ease;
+  box-shadow: var(--shadow-sm);
+  z-index: 201;
+}
+
+.sidebar-toggle:hover::after {
+  opacity: 1;
+}
+
+/* â”€â”€ CLOSED tooltip: "SHOW" badge to the right of the pill â”€â”€ */
+body.close .sidebar-toggle::after {
+  content: 'show sidebar';
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 10px);
+  right: auto;
+  bottom: auto;
+  transform: translateY(-50%);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  background: var(--color-primary);
+  border: none;
+  border-radius: 5px;
+  padding: 4px 9px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  box-shadow: var(--shadow-md);
+  z-index: 201;
+}
+
+body.close .sidebar-toggle:hover::after {
+  opacity: 1;
+}
+
+/* Section icons */
+.sidebar-nav>ul>li:nth-child(1)>p::before {
+  content: '\2601\fe0f  ';
+}
+
+.sidebar-nav>ul>li:nth-child(2)>p::before {
+  content: '\1f527  ';
+}
+
+.sidebar-nav>ul>li:nth-child(3)>p::before {
+  content: '\1f4cc  ';
+}
+
+.sidebar-nav>ul>li:nth-child(4)>p::before {
+  content: '\1f3d7\fe0f  ';
+}
+
+.sidebar-nav>ul>li:nth-child(5)>p::before {
+  content: '\1f4ca  ';
+}
+
+/* Sidebar scrollbar */
+.sidebar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 4px;
+}
+
+.sidebar:hover::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+}
+
+/* ================================================================
+   MAIN CONTENT AREA
+   ================================================================ */
+.content {
+  background: var(--bg-content) !important;
+  transition: background var(--transition) !important;
+}
+
+.markdown-section {
+  max-width: 860px !important;
+  padding: 40px 32px 100px !important;
+  /* Increased bottom padding */
+  animation: fadeInUp 0.35s ease both;
+}
+
+/* ================================================================
+   TYPOGRAPHY
+   ================================================================ */
+.markdown-section h1,
+.markdown-section h2,
+.markdown-section h3,
+.markdown-section h4,
+.markdown-section h5,
+.markdown-section h6 {
+  color: var(--text-heading) !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  transition: color var(--transition) !important;
+}
+
+.markdown-section h1 {
+  font-size: 2rem !important;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-primary) !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.markdown-section h2 {
+  font-size: 1.5rem !important;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid var(--border-color) !important;
+  margin-top: 2rem !important;
+}
+
+.markdown-section h2 a,
+.markdown-section h3 a {
+  text-decoration: none !important;
+  color: var(--text-heading) !important;
+}
+
+.markdown-section h2 a:hover,
+.markdown-section h3 a:hover {
+  color: var(--color-primary) !important;
+}
+
+.markdown-section a {
+  color: var(--color-primary) !important;
+  font-weight: 500 !important;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition), color var(--transition) !important;
+}
+
+.markdown-section a:hover {
+  color: var(--color-accent) !important;
+  border-bottom-color: var(--color-accent) !important;
+}
+
+.markdown-section p {
+  color: var(--text-body) !important;
+}
+
+.markdown-section strong {
+  color: var(--text-heading) !important;
+  font-weight: 700 !important;
+}
+
+.markdown-section em {
+  color: var(--text-muted) !important;
+}
+
+/* ================================================================
+   CODE -- INLINE
+   ================================================================ */
+.markdown-section code {
+  background: var(--bg-code) !important;
+  color: var(--text-code-inline) !important;
+  border-radius: 5px !important;
+  padding: 2px 7px !important;
+  font-family: 'JetBrains Mono', 'Roboto Mono', monospace !important;
+  font-size: 0.82em !important;
+  border: 1px solid var(--border-color) !important;
+  transition: background var(--transition) !important;
+}
+
+/* ================================================================
+   CODE -- BLOCKS  (macOS traffic-light header)
+   ================================================================ */
+.markdown-section pre {
+  background: var(--bg-pre) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: 12px !important;
+  padding: 44px 22px 22px !important;
+  line-height: 1.6 !important;
+  box-shadow: var(--shadow-md) !important;
+  position: relative;
+  overflow: auto;
+  transition: background var(--transition), border-color var(--transition) !important;
+}
+
+/* macOS-style dots header bar */
+.markdown-section pre::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 12px 12px 0 0;
+  background-image:
+    radial-gradient(circle 5px at 14px 50%, #ff5f57 0%, #ff5f57 100%),
+    radial-gradient(circle 5px at 30px 50%, #febc2e 0%, #febc2e 100%),
+    radial-gradient(circle 5px at 46px 50%, #28c840 0%, #28c840 100%);
+  background-repeat: no-repeat;
+}
+
+/* Language label */
+.markdown-section pre::after {
+  content: attr(data-lang);
+  position: absolute;
+  top: 8px;
+  right: 14px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-primary) !important;
+  font-family: 'JetBrains Mono', monospace;
+  opacity: 0.75;
+}
+
+.markdown-section pre>code {
+  background: transparent !important;
+  border: none !important;
+  color: var(--text-pre) !important;
+  font-size: 0.83rem !important;
+  font-family: 'JetBrains Mono', 'Roboto Mono', monospace !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ================================================================
+   TABLES
+   ================================================================ */
+.markdown-section table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm) !important;
+  margin: 1.5rem 0 !important;
+}
+
+.markdown-section th {
+  background: var(--color-primary) !important;
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  padding: 10px 16px !important;
+  font-size: 13px !important;
+  letter-spacing: 0.04em;
+  border: none !important;
+}
+
+.markdown-section td {
+  padding: 10px 16px !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border-color) !important;
+  color: var(--text-body) !important;
+  font-size: 14px !important;
+  transition: background var(--transition) !important;
+}
+
+.markdown-section tr:nth-child(2n) {
+  background-color: var(--bg-table-alt) !important;
+}
+
+.markdown-section tr:hover td {
+  background: var(--color-primary-glow) !important;
+}
+
+/* ================================================================
+   BLOCKQUOTES
+   ================================================================ */
+.markdown-section blockquote {
+  background: var(--bg-code) !important;
+  border-left: 4px solid var(--color-primary) !important;
+  border-radius: 0 8px 8px 0 !important;
+  padding: 14px 20px !important;
+  margin: 1.5rem 0 !important;
+  color: var(--text-muted) !important;
+}
+
+.markdown-section blockquote p {
+  color: var(--text-muted) !important;
+  font-weight: 400 !important;
+}
+
+/* HR */
+.markdown-section hr {
+  border: none !important;
+  border-top: 1px solid var(--border-color) !important;
+  margin: 2rem 0 !important;
+}
+
+/* Lists */
+.markdown-section ul li,
+.markdown-section ol li {
+  color: var(--text-body) !important;
+  margin: 4px 0 !important;
+}
+
+/* ================================================================
+   COVER PAGE
+   ================================================================ */
+section.cover {
+  background: linear-gradient(135deg, #0d1117 0%, #1a1f35 40%, #0d1629 100%) !important;
+}
+
+section.cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 20% 50%, rgba(92, 107, 192, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 229, 255, 0.08) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+section.cover .cover-main h1 {
+  font-size: 3.2rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #5C6BC0, #00E5FF) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  margin-bottom: 0.5rem !important;
+  border: none !important;
+}
+
+section.cover blockquote {
+  color: rgba(200, 210, 230, 0.85) !important;
+  font-size: 1.15rem !important;
+}
+
+section.cover .cover-main>p a {
+  border-radius: 50px !important;
+  border-color: var(--color-primary) !important;
+  color: var(--color-primary-light) !important;
+  padding: 0.75rem 2.2rem !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  letter-spacing: 0.05rem !important;
+  transition: all 0.2s ease !important;
+  backdrop-filter: blur(6px);
+  background: rgba(92, 107, 192, 0.1) !important;
+}
+
+section.cover .cover-main>p a:hover {
+  background: rgba(92, 107, 192, 0.25) !important;
+  box-shadow: 0 0 20px var(--color-primary-glow) !important;
+  transform: translateY(-2px);
+}
+
+section.cover .cover-main>p a:last-child {
+  background: linear-gradient(135deg, var(--color-primary), #3949AB) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  box-shadow: 0 4px 20px var(--color-primary-glow) !important;
+}
+
+section.cover .cover-main>p a:last-child:hover {
+  box-shadow: 0 6px 28px rgba(92, 107, 192, 0.55) !important;
+  transform: translateY(-2px) !important;
+  opacity: 1 !important;
+}
+
+/* ================================================================
+   PROGRESS BAR
+   ================================================================ */
+.progress {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent)) !important;
+  height: 3px !important;
+}
+
+/* ================================================================
+   SCROLLBAR
+   ================================================================ */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary);
+}
+
+/* ================================================================
+   TIP & WARNING BOXES
+   ================================================================ */
+.markdown-section p.tip {
+  background: rgba(92, 107, 192, 0.1) !important;
+  border-left: 4px solid var(--color-primary) !important;
+  border-radius: 0 8px 8px 0 !important;
+  padding: 14px 20px 14px 36px !important;
+}
+
+.markdown-section p.tip::before {
+  background: var(--color-primary) !important;
+}
+
+.markdown-section p.warn {
+  background: rgba(255, 170, 0, 0.08) !important;
+  border-left: 4px solid #FFAA00 !important;
+  border-radius: 0 8px 8px 0 !important;
+  padding: 14px 20px !important;
+}
+
+/* ================================================================
+   ANCHOR LINKS
+   ================================================================ */
+.anchor {
+  color: var(--color-primary) !important;
+  opacity: 0;
+  margin-left: 6px;
+  transition: opacity var(--transition) !important;
+}
+
+h1:hover .anchor,
+h2:hover .anchor,
+h3:hover .anchor,
+h4:hover .anchor,
+h5:hover .anchor,
+h6:hover .anchor {
+  opacity: 1;
+}
+
+/* ================================================================
+   ANIMATIONS
+   ================================================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================================================
+   PAGINATION
+   ================================================================ */
+.pagination-item {
+  border: 1px solid var(--border-color) !important;
+  border-radius: 8px !important;
+  transition: all var(--transition) !important;
+}
+
+.pagination-item:hover {
+  border-color: var(--color-primary) !important;
+  background: var(--color-primary-glow) !important;
+}
+
+.pagination-item a {
+  color: var(--text-body) !important;
+  font-size: 13px !important;
+}
+
+.pagination-item--title {
+  color: var(--color-primary) !important;
+  font-weight: 600 !important;
+}
+
+/* ================================================================
+   COPY CODE BUTTON
+   ================================================================ */
+.docsify-copy-code-button {
+  background: var(--color-primary) !important;
+  color: #fff !important;
+  border-radius: 6px !important;
+  font-size: 11px !important;
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+  top: 40px !important;
+  right: 10px !important;
+  padding: 4px 10px !important;
+  opacity: 0 !important;
+  transition: opacity var(--transition) !important;
+}
+
+.markdown-section pre:hover .docsify-copy-code-button {
+  opacity: 1 !important;
+}
+
+.docsify-copy-code-button.success {
+  background: #28c840 !important;
+}
+
+/* App loading */
+div#app {
+  color: var(--color-primary) !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+/* ================================================================
+   MOBILE
+   ================================================================ */
+@media (max-width: 768px) {
+  #theme-toggle {
+    top: 14px;
+    right: 14px;
+    padding: 5px 10px 5px 8px;
+    font-size: 12px;
+  }
+
+  .markdown-section {
+    padding: 30px 18px 80px !important;
+    /* Increased bottom padding for mobile */
+    max-width: 100% !important;
+  }
+
+  /* On mobile sidebar is closed by default; show toggle at the left edge */
+  .sidebar-toggle {
+    position: fixed !important;
+    top: 50% !important;
+    left: 0 !important;
+    right: auto !important;
+    transform: translateY(-50%) !important;
+    border-radius: 0 50% 50% 0 !important;
+    width: 26px !important;
+    border-left: none !important;
+    background: var(--color-primary) !important;
+    box-shadow: 3px 0 16px rgba(0, 0, 0, 0.28) !important;
+  }
+
+  .sidebar-toggle span {
+    background-color: #fff !important;
+    width: 12px !important;
+  }
+}
+
+/* ================================================================
+   HERO BANNER -- README Home Page
+   ================================================================ */
+
+/* Hero wrapper */
+.hero-banner {
+  background: linear-gradient(135deg,
+      rgba(92, 107, 192, 0.12) 0%,
+      rgba(0, 229, 255, 0.06) 50%,
+      rgba(92, 107, 192, 0.08) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 40px 40px 36px !important;
+  margin-bottom: 36px !important;
+  position: relative;
+  overflow: hidden;
+  animation: fadeInUp 0.4s ease both;
+}
+
+/* Subtle top glow line */
+.hero-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--color-primary), var(--color-accent), transparent);
+}
+
+/* Hero h1 */
+.hero-banner h1 {
+  font-size: 2.1rem !important;
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  border: none !important;
+  margin: 0 0 16px 0 !important;
+  padding: 0 !important;
+  letter-spacing: -0.01em;
+  line-height: 1.2 !important;
+}
+
+/* Hero subtitle blockquote */
+.hero-banner blockquote {
+  background: transparent !important;
+  border-left: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 0 24px 0 !important;
+  font-size: 1.05rem !important;
+  color: var(--text-body) !important;
+  line-height: 1.65;
+}
+
+.hero-banner blockquote p {
+  color: var(--text-body) !important;
+  font-weight: 400 !important;
+}
+
+.hero-banner blockquote strong {
+  color: var(--text-heading) !important;
+}
+
+/* Tech pill badges */
+.hero-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  padding: 5px 12px;
+  border-radius: 50px;
+  border: 1px solid;
+  font-family: 'Inter', sans-serif;
+  white-space: nowrap;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.pill-cloud {
+  color: #7986CB;
+  border-color: rgba(121, 134, 203, 0.4);
+  background: rgba(121, 134, 203, 0.1);
+}
+
+.pill-devops {
+  color: #26C6DA;
+  border-color: rgba(38, 198, 218, 0.4);
+  background: rgba(38, 198, 218, 0.1);
+}
+
+.pill-iac {
+  color: #66BB6A;
+  border-color: rgba(102, 187, 106, 0.4);
+  background: rgba(102, 187, 106, 0.1);
+}
+
+.pill-monitor {
+  color: #FFA726;
+  border-color: rgba(255, 167, 38, 0.4);
+  background: rgba(255, 167, 38, 0.1);
+}
+
+/* Hero CTA buttons row */
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+}
+
+/* Social attribution row (beside the CTA button) */
+.hero-social {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.hero-social-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+}
+
+.hero-social-sep {
+  color: var(--border-color);
+  font-size: 14px;
+  line-height: 1;
+  user-select: none;
+}
+
+.hero-social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12.5px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-muted) !important;
+  text-decoration: none !important;
+  border-bottom: none !important;
+  padding: 4px 10px;
+  border-radius: 50px;
+  border: 1px solid var(--border-color);
+  background: transparent;
+  transition: all 0.18s ease;
+  white-space: nowrap;
+  -webkit-text-fill-color: unset;
+}
+
+.hero-social-link svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.hero-social-link:hover {
+  background: var(--color-primary-glow);
+  border-color: var(--color-primary);
+  color: var(--color-primary) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 12px var(--color-primary-glow);
+  -webkit-text-fill-color: unset;
+  border-bottom: none !important;
+}
+
+.hero-social-link:hover svg {
+  opacity: 1;
+}
+
+/* Fiverr link accent */
+.hero-social-fiverr:hover {
+  color: #1dbf73 !important;
+  border-color: #1dbf73 !important;
+  background: rgba(29, 191, 115, 0.1) !important;
+  box-shadow: 0 3px 12px rgba(29, 191, 115, 0.2) !important;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13.5px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  padding: 9px 20px;
+  border-radius: 50px;
+  text-decoration: none !important;
+  border: 1.5px solid transparent;
+  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--color-primary) 0%, #3949AB 100%);
+  color: #ffffff !important;
+  border-color: transparent;
+  box-shadow: 0 4px 18px var(--color-primary-glow);
+  -webkit-text-fill-color: #ffffff;
+}
+
+.btn-primary:hover {
+  box-shadow: 0 6px 28px rgba(92, 107, 192, 0.55);
+  transform: translateY(-2px);
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff;
+  border-bottom-color: transparent !important;
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary) !important;
+  border-color: var(--color-primary);
+  -webkit-text-fill-color: unset;
+}
+
+.btn-outline:hover {
+  background: var(--color-primary-glow);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px var(--color-primary-glow);
+  color: var(--color-primary) !important;
+  border-bottom-color: var(--color-primary) !important;
+}
+
+/* Overview table inside README */
+.markdown-section>table:first-of-type {
+  margin-top: 0 !important;
+}
+
+/* Responsive hero */
+@media (max-width: 768px) {
+  .hero-banner {
+    padding: 28px 20px 24px !important;
+  }
+
+  .hero-banner h1 {
+    font-size: 1.6rem !important;
+  }
+
+  .hero-pills {
+    gap: 6px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ================================================================
+   VERTICAL SOCIAL DOCK  --  fixed right-center
+   ================================================================
+   KEY DESIGN: Each item is a FIXED 40px wide icon.
+   The label uses position:ABSOLUTE so it floats out to the LEFT
+   of its own icon only â€” no layout shift, no other items affected.
+   ================================================================ */
+
+#social-dock {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99998;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 0;
+}
+
+/* Each row: fixed 40px, relative so label can float out absolutely */
+.dock-item {
+  position: relative;
+  /* label uses absolute positioning */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 40px;
+  /* NEVER changes â€” no width animation */
+  height: 40px;
+  overflow: visible;
+  /* allow label to overflow leftward */
+  text-decoration: none !important;
+  border-bottom: none !important;
+  cursor: pointer;
+  /* no width transition needed */
+}
+
+/* Icon square â€” always visible at the right edge */
+.dock-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-right: none;
+  /* flush to viewport right edge */
+  border-radius: 10px 0 0 10px;
+  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.16);
+  transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.dock-icon svg {
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  display: block;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* Label â€” ABSOLUTELY positioned to the LEFT of the icon */
+.dock-label {
+  position: absolute;
+  right: 40px;
+  /* sits immediately left of the 40px icon */
+  top: 0;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px 0 16px;
+  white-space: nowrap;
+  font-family: 'Inter', sans-serif;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-right: none;
+  border-radius: 10px 0 0 10px;
+  box-shadow: -3px 0 14px rgba(0, 0, 0, 0.14);
+  z-index: 1;
+
+  /* HIDDEN state: slid rightward under the icon, invisible */
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(12px);
+  transition:
+    opacity 0.22s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* HOVERED: only THIS item's label slides out â€” others unchanged */
+.dock-item:hover .dock-label {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+
+/* Icon lift on hover */
+.dock-item:hover .dock-icon {
+  box-shadow: -4px 0 18px rgba(0, 0, 0, 0.28);
+}
+
+/* â”€â”€ Per-brand accent colours â”€â”€ */
+#dock-portfolio:hover .dock-icon {
+  background: rgba(92, 107, 192, 0.14);
+  border-color: var(--color-primary);
+}
+
+#dock-portfolio:hover .dock-icon svg {
+  color: var(--color-primary);
+  transform: scale(1.12);
+}
+
+#dock-portfolio:hover .dock-label {
+  background: rgba(92, 107, 192, 0.10);
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+#dock-github:hover .dock-icon {
+  background: rgba(139, 148, 158, 0.14);
+  border-color: #8b949e;
+}
+
+#dock-github:hover .dock-icon svg {
+  color: var(--text-heading);
+  transform: scale(1.12);
+}
+
+#dock-github:hover .dock-label {
+  background: rgba(139, 148, 158, 0.08);
+  border-color: #8b949e;
+  color: var(--text-heading);
+}
+
+#dock-linkedin:hover .dock-icon {
+  background: rgba(10, 102, 194, 0.14);
+  border-color: #0A66C2;
+}
+
+#dock-linkedin:hover .dock-icon svg {
+  color: #0A66C2;
+  transform: scale(1.12);
+}
+
+#dock-linkedin:hover .dock-label {
+  background: rgba(10, 102, 194, 0.08);
+  border-color: #0A66C2;
+  color: #0A66C2;
+}
+
+#dock-instagram:hover .dock-icon {
+  background: rgba(193, 53, 132, 0.12);
+  border-color: #C13584;
+}
+
+#dock-instagram:hover .dock-icon svg {
+  color: #C13584;
+  transform: scale(1.12);
+}
+
+#dock-instagram:hover .dock-label {
+  background: rgba(193, 53, 132, 0.07);
+  border-color: #C13584;
+  color: #C13584;
+}
+
+#dock-youtube:hover .dock-icon {
+  background: rgba(255, 0, 0, 0.12);
+  border-color: #FF0000;
+}
+
+#dock-youtube:hover .dock-icon svg {
+  color: #FF0000;
+  transform: scale(1.12);
+}
+
+#dock-youtube:hover .dock-label {
+  background: rgba(255, 0, 0, 0.07);
+  border-color: #FF0000;
+  color: #cc0000;
+}
+
+/* Mobile: keep icons, hide labels */
+@media (max-width: 768px) {
+  #social-dock {
+    gap: 4px;
+    padding: 6px 0;
+  }
+
+  .dock-icon {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
+
+  .dock-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .dock-label {
+    display: none;
+  }
+}
+
+/* ================================================================
+/* ================================================================
+   PROFESSIONAL ENTERPRISE SUPPORT CARD
+   ================================================================ */
+.support-card {
+  margin: 4rem auto 2rem;
+  max-width: 800px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s ease;
+}
+
+.support-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.support-card-inner {
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.support-text {
+  flex: 1;
+}
+
+.support-text h3 {
+  margin-top: 0 !important;
+  font-size: 1.25rem !important;
+  color: var(--color-primary) !important;
+  font-weight: 700 !important;
+}
+
+.support-text p {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin: 0.5rem 0;
+}
+
+.support-action {
+  background: rgba(255, 129, 63, 0.05);
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 200px;
+}
+
+.bmc-btn img {
+  height: 48px !important;
+  transition: transform 0.2s ease;
+}
+
+.bmc-btn:hover img {
+  transform: scale(1.05);
+}
+
+.support-tagline {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+@media (max-width: 600px) {
+  .support-card-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .support-action {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+/* ================================================================
+   PROFESSIONAL CENTERED FOOTER
+   ================================================================ */
+#site-footer {
+  position: fixed;
+  bottom: 0;
+  left: 300px;
+  right: 0;
+  height: 44px;
+  /* Slightly taller for better readability */
+  background: var(--bg-body-transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-color);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 40px;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+  /* Let clicks pass through to content underneath */
+}
+
+#site-footer * {
+  pointer-events: auto;
+  /* Re-enable clicks for copyright text/links */
+}
+
+body.close #site-footer {
+  left: 0;
+}
+
+.copyright {
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+#footer-year {
+  font-weight: 700;
+  color: var(--color-primary);
+}
+
+@media (max-width: 768px) {
+  #site-footer {
+    left: 0 !important;
+    padding: 0 20px;
+    height: 44px;
+  }
+}
+
+/* Ensure content doesn't get hidden behind fixed footer */
+section.content {
+  padding-bottom: 120px !important;
+  /* Large buffer to ensure footer never hides content */
+}
