@@ -689,7 +689,7 @@ body.close .sidebar-toggle:hover::after {
 .markdown-section h4,
 .markdown-section h5,
 .markdown-section h6 {
-  color: var(--text-heading) !important;
+  color: var(--color-primary) !important;
   font-weight: 600 !important;
   line-height: 1.3 !important;
   transition: color var(--transition) !important;
@@ -709,15 +709,25 @@ body.close .sidebar-toggle:hover::after {
   margin-top: 2rem !important;
 }
 
+.markdown-section h1 a,
 .markdown-section h2 a,
-.markdown-section h3 a {
+.markdown-section h3 a,
+.markdown-section h4 a,
+.markdown-section h5 a,
+.markdown-section h6 a {
   text-decoration: none !important;
-  color: var(--text-heading) !important;
+  color: inherit !important;
+  border-bottom: none !important;
 }
 
+.markdown-section h1 a:hover,
 .markdown-section h2 a:hover,
-.markdown-section h3 a:hover {
-  color: var(--color-primary) !important;
+.markdown-section h3 a:hover,
+.markdown-section h4 a:hover,
+.markdown-section h5 a:hover,
+.markdown-section h6 a:hover {
+  color: var(--color-accent) !important;
+  border-bottom: none !important;
 }
 
 .markdown-section a {
@@ -908,9 +918,9 @@ section.cover::before {
 section.cover .cover-main h1 {
   font-size: 3.2rem !important;
   font-weight: 800 !important;
+  color: var(--color-primary) !important;
   background: linear-gradient(135deg, #5C6BC0, #00E5FF) !important;
   -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
   margin-bottom: 0.5rem !important;
   border: none !important;
@@ -1008,8 +1018,7 @@ section.cover .cover-main>p a:last-child:hover {
    ================================================================ */
 .anchor {
   color: var(--color-primary) !important;
-  opacity: 0;
-  margin-left: 6px;
+  opacity: 1;
   transition: opacity var(--transition) !important;
 }
 
@@ -1163,9 +1172,9 @@ div#app {
 .hero-banner h1 {
   font-size: 2.1rem !important;
   font-weight: 800 !important;
+  color: var(--color-primary) !important;
   background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%) !important;
   -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
   background-clip: text !important;
   border: none !important;
   margin: 0 0 16px 0 !important;
