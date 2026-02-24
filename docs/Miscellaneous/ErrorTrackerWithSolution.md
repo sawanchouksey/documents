@@ -1,13 +1,19 @@
-# Here you will get most of the Error with solution what we faced daily day to day life as a Cloud or devOps Engineer
+# Cloud & DevOps Troubleshooting Guide
 
-## Error
-Warning  FailedAddFinalizer  5m25s (x11 over 5m31s)  ingress  Failed add finalizer due to Internal error occurred: failed calling webhook "vingress.elbv2.k8s.aws": failed to call webhook: Post "https://aws-load-balancer-webhook-service.alb-controller.svc:443/validate-networking-v1-ingress?timeout=10s": no endpoints available for service "aws-load-balancer-webhook-service"
+This comprehensive guide provides solutions to common errors encountered by Cloud and DevOps engineers in day-to-day operations. Each entry includes detailed explanations and step-by-step resolutions.
 
-##### Explaination:
-We are facing issue deploying `alb ingress controller` with helm charts and trying to deploy ingress with ACM certificate but not defined TLS secret in ingress file.
+## Error 1: ALB Ingress Controller - Missing TLS Configuration
 
-##### Solution
-- update the ingress file with `tls secret details for https prtocol 443`
+### Error Message
+```
+Warning FailedAddFinalizer 5m25s (x11 over 5m31s) ingress Failed add finalizer due to Internal error occurred: failed calling webhook "vingress.elbv2.k8s.aws": failed to call webhook: Post "https://aws-load-balancer-webhook-service.alb-controller.svc:443/validate-networking-v1-ingress?timeout=10s": no endpoints available for service "aws-load-balancer-webhook-service"
+```
+
+### Explanation
+This error occurs when deploying an ALB Ingress Controller via Helm charts with an ACM certificate, but the TLS secret is not defined in the Ingress file.
+
+### Solution
+Update the Ingress file to include TLS secret details for HTTPS protocol on port 443:
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -83,29 +89,50 @@ spec:
                   number: 80  
 ```
 
-## Error
+## Error 2: OpenSearch - Field Length Exceeded for Highlighting
 
+### Error Message
 ```json
-{ "took": 1698, "timed_out": false, "_shards": { "total": 45, "successful": 44, "skipped": 44, "failed": 1, "failures": [ { "shard": 0, "index": "sawan-app-2025.02.24", "node": "jkfdskhfjsid-hfsdjfhjs", "reason":
-{ "type": "illegal_argument_exception", "reason": "The length of [log] field of [23787] doc of [sawan-app-2025.02.24] index has exceeded [1000000] - maximum allowed to be analyzed for highlighting. This maximum can be set by changing the [index.highlight.max_analyzed_offset] index level setting. For large texts, indexing with offsets or term vectors is recommended!" }
+{
+  "took": 1698,
+  "timed_out": false,
+  "_shards": {
+    "total": 45,
+    "successful": 44,
+    "skipped": 44,
+    "failed": 1,
+    "failures": [
+      {
+        "shard": 0,
+        "index": "sawan-app-2025.02.24",
+        "node": "jkfdskhfjsid-hfsdjfhjs",
+        "reason": {
+          "type": "illegal_argument_exception",
+          "reason": "The length of [log] field of [23787] doc of [sawan-app-2025.02.24] index has exceeded [1000000] - maximum allowed to be analyzed for highlighting. This maximum can be set by changing the [index.highlight.max_analyzed_offset] index level setting. For large texts, indexing with offsets or term vectors is recommended!"
+        }
+      }
+    ]
+  }
+}
 ```
 
-##### Explaination:
-We Are facing issue in `opensearch` dashboards in AWS while fetching or try to get logs on based on specific filter or string .
+### Explanation
+This error occurs in AWS OpenSearch Dashboards when attempting to fetch logs based on specific filters or search strings. The log field exceeds the maximum allowed size for highlighting analysis.
 
-##### Solution
+### Solution
 
-**Steps to reach the Query Editor in OpenSearch Dashboards:**
+#### Steps to Access the Query Editor in OpenSearch Dashboards
 
-1. Log in to `OpenSearch Dashboards`
-2. Click on the `menu icon (hamburger menu)` in the top left corner
-3. Look for and click on `Dev Tools` in the menu
-4. This will open the `Console interface` where you can run `queries` against your `OpenSearch` cluster
-5. Write your `queries` in the `left panel` and click the `play button` or use `Ctrl+Enter` to execute them
-6. Results will appear in the `right panel`
+1. Log in to **OpenSearch Dashboards**
+2. Click on the **menu icon** (hamburger menu) in the top-left corner
+3. Select **Dev Tools** from the menu
+4. This will open the **Console interface** where you can execute queries against your OpenSearch cluster
+5. Write your queries in the **left panel** and click the **play button** or press **Ctrl+Enter** to execute
+6. View results in the **right panel**
 
-**Queries in the console:**
-1. A basic search query:
+#### Query Examples
+
+**1. Basic search query:**
 ```
 GET _search
 {
@@ -115,7 +142,7 @@ GET _search
 }
 ```
 
-2. Settings update:
+**2. Update index settings:**
 
 ```
 PUT /370844-2023*/_settings
@@ -139,7 +166,7 @@ PUT /_index_template/template_370844
 }
 ```
 
-3. Various GET requests for settings and information:
+**3. Retrieve settings and cluster information:**
 
 ```
 GET /sawan-app-2024.02.25/_settings
@@ -152,41 +179,53 @@ PUT /_index_template/template_370844
 ```
 
 
-5. More GET requests:
+**4. Additional GET requests:**
 ```
 GET /_cat/allocation?v&s=disk.avail
 GET _template/sawan_field_config
 ```
 
-The Dev Tools console is where you can directly interact with OpenSearch's REST API and run all the queries shown in the image.
+The Dev Tools console provides direct interaction with OpenSearch's REST API for executing these queries.
 
-## Error
+---
+
+## Error 3: Karpenter - Failed to Resolve Security Groups
+
+### Error Message
 
 ```
 kubectl logs <karpenter controller pod> -n karpenter
 ```
 
+```
 Error conditions:
-    - lastTransitionTime: "2024-10-11T12:15:20Z"
-      message: Failed to resolve security groups
-      reason: NodeClassNotReady
-      status: "False"
-      type: Ready
+  - lastTransitionTime: "2024-10-11T12:15:20Z"
+    message: Failed to resolve security groups
+    reason: NodeClassNotReady
+    status: "False"
+    type: Ready
+```
 
-##### Explaination:
-We Are facing issue after implementing `Karpenter` in AWS eks. All pods are always in pending state and not scheduling. Because `karpenter` not able to increase or create new node in eks.
+### Explanation
+This issue occurs after implementing Karpenter in AWS EKS. All pods remain in a pending state and are not being scheduled because Karpenter is unable to provision or create new nodes in the EKS cluster.
 
-##### Solution:
+### Solution
 
-1. Check `ec2NodeClass` for `karpenter` and check tags are assigned correctly or not.
+**1. Verify the ec2NodeClass configuration**
+
+Check if tags are assigned correctly:
 
 ```
 k get ec2nodeclass default -o yaml
 ```
 
-2. check `securityGroup` and `subnet` have tagged listed as mentioned in `ec2NodeClass`. check spelling etc.
+**2. Validate security group and subnet tags**
 
-3. So we found there is tag mismatch in `security group` So update the tags in `ec2NodeClass` configuration and re-apply yaml file for it.
+Ensure that the `securityGroup` and `subnet` have the tags listed in the `ec2NodeClass` configuration. Verify spelling and tag names.
+
+**3. Update ec2NodeClass with correct tags**
+
+If you find a tag mismatch in the security group, update the tags in the `ec2NodeClass` configuration:
 
 ```
 securityGroupSelectorTerms:
@@ -199,82 +238,99 @@ securityGroupSelectorTerms:
 ```
 
 ```
-kuebctl apply -f ec2NodeClass.yaml
+kubectl apply -f ec2NodeClass.yaml
 ```
 
-4. Now please rollout restart the `karpenter` deployment.
+**4. Restart the Karpenter deployment**
 
 ```
 kubectl rollout restart deploy karpenter -n karpenter
 ```
 
-5. Check the configuration again and monitor it with scaling application
+**5. Verify the configuration and monitor scaling**
 
 ```
 kubectl logs <karpenter controller pod> -n karpenter
 ```
 
+Expected output:
 ```
 conditions:
-    - lastTransitionTime: "2024-10-14T06:08:10Z"
-      message: ""
-      reason: Ready
-      status: "True"
-      type: Ready
-```
-## Error
-
-Error syncing load balancer: failed to ensure load balancer: Multiple untagged security groups found for instance
-i-0580321e00235d0f9: ensure the k88 security group is tagged
-
-##### Explaination:
-
-We are facing these issue normally using same VPC, secuirty group for mutiple Eks. During creating Service type `LoadBalancer` specially i.e. `creating istio-gteway-loadbalancer-service`.
-
-##### Solution:
-
-We need to Check and add few tags in `node security group` and `subnets`  as well
-
-Multiple eks in same VPC
-
-- The "shared" value allows more than one cluster to use the subnet or security group.
-- The "Owned" value allows more than one cluster to use the subnet or security group.
-
-All `subnet` must have tag if `same` subnet used in both eks worker node
-
-```
-"Key": "kubernetes.io/cluster/<Cluster-Name> ","Value": "shared"
+  - lastTransitionTime: "2024-10-14T06:08:10Z"
+    message: ""
+    reason: Ready
+    status: "True"
+    type: Ready
 ```
 
-All `subnet` must have tag if `different` subnet used in both eks worker node
+---
 
-```
-"Key": "kubernetes.io/cluster/<Cluster-Name> ","Value": "owned"
-```
+## Error 4: Multiple Untagged Security Groups for EKS Load Balancer
 
-All `secuirty group` must have tag if same `secuirty group` used in both eks worker node
-
-```
-"Key": "kubernetes.io/cluster/<Cluster-Name> ","Value": "shared"
+### Error Message
 ```
 
-All `secuirty group` must have tag if different `secuirty group` used in both eks worker node
-
-```
-"Key": "kubernetes.io/cluster/<Cluster-Name> ","Value": "owned"
+Error syncing load balancer: failed to ensure load balancer: Multiple untagged security groups found for instance i-0580321e00235d0f9: ensure the k8s security group is tagged
 ```
 
-## Error
+### Explanation
+This error typically occurs when using the same VPC and security groups for multiple EKS clusters, particularly when creating a Service of type `LoadBalancer` (e.g., Istio Gateway LoadBalancer Service).
+
+### Solution
+
+Add the appropriate tags to node security groups and subnets.
+
+#### For Multiple EKS Clusters in the Same VPC
+
+- The **"shared"** value allows multiple clusters to use the same subnet or security group
+- The **"owned"** value indicates that only one cluster uses the resource
+
+#### Subnet Tagging Rules
+
+**When the same subnet is used across multiple EKS clusters:**
+
+```
+"Key": "kubernetes.io/cluster/<Cluster-Name>",
+"Value": "shared"
+```
+
+**When different subnets are used across EKS clusters:**
+```
+"Key": "kubernetes.io/cluster/<Cluster-Name>",
+"Value": "owned"
+```
+
+#### Security Group Tagging Rules
+
+**When the same security group is used across multiple EKS clusters:**
+
+```
+"Key": "kubernetes.io/cluster/<Cluster-Name>",
+"Value": "shared"
+```
+
+**When different security groups are used across EKS clusters:**
+```
+"Key": "kubernetes.io/cluster/<Cluster-Name>",
+"Value": "owned"
+```
+
+---
+
+## Error 5: SAM Build - PythonPipBuilder ResolveDependencies Failure
+
+### Error Message
+```
 
 Error: PythonPipBuilder:ResolveDependencies - {simplejson==3.17.2(sdist), pydantic-core==2.4.0(wheel), awslambdaric==2.0.7(wheel)}
+```
 
-##### Explanation:
+### Explanation
+This error occurs when running `sam build` for a Python 3.11 application in AWS, particularly when building via an EKS Jenkins CI/CD pipeline with an agent that has Python 3.11, SAM CLI, and AWS CLI installed.
 
-We are facing this error while trying to run command `sam build` in AWS while building python application with python3.11 and try to run with eks jenkins cicd with agent having `python3.11, sam cli & AWS cli` .
+### Solution
 
-##### Solution:
-
-Update the archietecture type with respect to `sam-cli` archietecture i.e if its `arm64 or x86_64` in `template.yaml` file
+Update the architecture type in the `template.yaml` file to match the SAM CLI architecture (either `arm64` or `x86_64`):
 
 ```
 AWSTemplateFormatVersion: '2010-09-09'
@@ -324,61 +380,76 @@ Outputs:
 ## Error
 
 Error: Failed to create changeset for the stack: axaws-test-dev-knowledgebase-function, ex: Waiter ChangeSetCreateComplete failed: Waiter encountered a terminal failure state: For expression "Status" we matched expected path: "FAILED" Status: FAILED. Reason: User: arn:aws:sts::123456789012:assumed-role/axaws-test-jenkins-dev-crossaccount-role/xactarget is not authorized to perform: cloudformation:CreateChangeSet on resource: arn:aws:cloudformation:ap-south-1:aws:transform/Serverless-2016-10-31 because no identity-based policy allows the cloudformation:CreateChangeSet action
+```
 
-##### Explanation:
+### Explanation
+This error occurs with Python 3.11 applications when executing `sam deploy --capabilities CAPABILITY_IAM`. The IAM role lacks the required permissions to create CloudFormation change sets.
 
-We are facing error with python-3.11 tech stack application during `sam deploy --capabilities CAPABILITY_IAM`
+### Solution
 
-##### Solution:
-
-We need to add policy in IAM Role
+Add the following policy to the IAM role:
 
 ```
- {
-    "Version": "2012-10-17",
-    "Statement": [{
-"Effect": "Allow",
-        "Action": "cloudformation:CreateChangeSet",
-        "Resource": [
-            "arn:aws:cloudformation:us-east-1:123123123123:stack/some-stack-name/*",
-            "arn:aws:cloudformation:us-east-1:aws:transform/Serverless-2016-10-31"
-    ]
- }]
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "cloudformation:CreateChangeSet",
+      "Resource": [
+        "arn:aws:cloudformation:us-east-1:123123123123:stack/some-stack-name/*",
+        "arn:aws:cloudformation:us-east-1:aws:transform/Serverless-2016-10-31"
+      ]
+    }
+  ]
 }
 ```
 
-[Controlling access with AWS Identity and Access Management - AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html)
+**Reference:** [Controlling Access with AWS Identity and Access Management - AWS CloudFormation](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html)
 
-## Error
+---
 
-We are facing `slightly delay` in getting `response` from API request around `120 seconds` in `Intermittent connection` specially whenever try to connect after first attempt.
+## Error 7: Intermittent Connection Delays with Network Load Balancer
 
-##### Explanation:
+### Error Message
+API requests experience delays of approximately 120 seconds, particularly on the first connection attempt after an idle period.
 
-We are using `nginx load Balancer as proxy server in ec2 instance`, `Istio service mesh with ingress gateway` which use `Network Load Balancer` in aws and application running in `eks pod` with `Java 21` and `spring boot application` written in `Kotlin`.
+### Explanation
+This issue occurs in an environment using:
+- **Nginx load balancer** as a proxy server on EC2 instances
+- **Istio service mesh** with Ingress Gateway using a Network Load Balancer in AWS
+- **Application** running in EKS pods with Java 21 and Spring Boot (written in Kotlin)
 
-###### Solution:
+### Solution
 
-- In `Nginx server ec2 intance` Check telnet for dns name configured with NLB with 443 port and check IP address try 4-5 times and monitor responses.
-  
-  ```
-  telnet test-poc.alb.example.com 443
-  ```
+**Step 1: Test NLB connectivity**
 
-- Copy the `IP address` for the telnet output which is working and connecting quickly without delay.
+On the Nginx server EC2 instance, test the DNS name configured with the NLB on port 443. Run this test 4-5 times and monitor the responses:
 
-- make an entry in `/etc/hosts` file with with `IP address and DNS Name`
-  
-  ```
-  vi /etc/hosts
-  10.0.23.45 test-poc.alb.example.com
-  ```
+```bash
+telnet test-poc.alb.example.com 443
+```
 
-- It will solve problem and everytime request coming nginx will send traffic to specific Network Load Balancer IP only.
+**Step 2: Identify the working IP address**
 
-- `References:`
-  
-  ##### TCP connection delays
+Copy the IP address from the telnet output that connects quickly without delay.
+
+**Step 3: Update the hosts file**
+
+Add an entry in `/etc/hosts` with the IP address and DNS name:
+
+```bash
+vi /etc/hosts
+# Add this line:
+10.0.23.45 test-poc.alb.example.com
+```
+
+This ensures that Nginx will consistently route traffic to the specific Network Load Balancer IP, eliminating connection delays.
+
+### Technical Background
+
+#### TCP Connection Delays
   
   When both cross-zone load balancing and client IP preservation are enabled, a client connecting to different IPs on the same load balancer may be routed to the same target. If the client uses the same source port for both of these connections, the target will receive what appears to be a duplicate connection, which can lead to connection errors and TCP delays in establishing new connections. You can prevent this type of connection error by disabling cross-zone load balancing. For more information, see [Cross-zone load balancing](https://docs.aws.amazon.com/elasticloadbalancing/latest/network/network-load-balancers.html#cross-zone-load-balancing).
   
@@ -394,76 +465,57 @@ We are using `nginx load Balancer as proxy server in ec2 instance`, `Istio servi
 
 Error: 
 
-- Application Pods logs : Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
-  Exception in thread "main" com.amazonaws.SdkClientException: Unable to execute HTTP request: secretsmanager.ap-south-1.amazonaws.com
-  
-          at com.amazonaws.http.AmazonHttpClient$RequestExecutor.handleRetryableException(AmazonHttpClient.java:1219)
-          at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeHelper(AmazonHttpClient.java:1165)
-          at com.amazonaws.http.AmazonHttpClient$RequestExecutor.doExecute(AmazonHttpClient.java:814)
-          at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeWithTimer(AmazonHttpClient.java:781)
-          at com.amazonaws.http.AmazonHttpClient$RequestExecutor.execute(AmazonHttpClient.java:755)
-          at com.amazonaws.http.AmazonHttpClient$RequestExecutor.access$500(AmazonHttpClient.java:715)
-          at com.amazonaws.http.AmazonHttpClient$RequestExecutionBuilderImpl.execute(AmazonHttpClient.java:697)
-          at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:561)
-          at com.amazonaws.http.AmazonHttpClient.execute(AmazonHttpClient.java:541)
-          at com.amazonaws.services.secretsmanager.AWSSecretsManagerClient.doInvoke(AWSSecretsManagerClient.java:2616)
-          at com.amazonaws.services.secretsmanager.AWSSecretsManagerClient.invoke(AWSSecretsManagerClient.java:2583)
-          at com.amazonaws.services.secretsmanager.AWSSecretsManagerClient.invoke(AWSSecretsManagerClient.java:2572)
-          at com.amazonaws.services.secretsmanager.AWSSecretsManagerClient.executeGetSecretValue(AWSSecretsManagerClient.java:1205)
-          at com.amazonaws.services.secretsmanager.AWSSecretsManagerClient.getSecretValue(AWSSecretsManagerClient.java:1177)
-          at com.notes.sawan.sawanApplication$Companion.getSecret(sawanApplication.kt:64)
-          at com.notes.sawan.sawanApplication$Companion.main(sawanApplication.kt:22)
-          at com.notes.sawan.sawanApplication.main(sawanApplication.kt)
-  
-  Caused by: java.net.UnknownHostException: secretsmanager.ap-south-1.amazonaws.com
-  
-          at java.base/java.net.InetAddress$CachedLookup.get(InetAddress.java:988)
-          at java.base/java.net.InetAddress.getAllByName0(InetAddress.java:1818)
-          at java.base/java.net.InetAddress.getAllByName(InetAddress.java:1688)
-          at com.amazonaws.SystemDefaultDnsResolver.resolve(SystemDefaultDnsResolver.java:27)
-          at com.amazonaws.http.DelegatingDnsResolver.resolve(DelegatingDnsResolver.java:38)
-          at org.apache.http.impl.conn.DefaultHttpClientConnectionOperator.connect(DefaultHttpClientConnectionOperator.java:112)
-          at org.apache.http.impl.conn.PoolingHttpClientConnectionManager.connect(PoolingHttpClientConnectionManager.java:376)
-          at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
-          at java.base/java.lang.reflect.Method.invoke(Method.java:580)
-          at com.amazonaws.http.conn.ClientConnectionManagerFactory$Handler.invoke(ClientConnectionManagerFactory.java:76)
-          at com.amazonaws.http.conn.$Proxy10.connect(Unknown Source)
-          at org.apache.http.impl.execchain.MainClientExec.establishRoute(MainClientExec.java:393)
-          at org.apache.http.impl.execchain.MainClientExec.execute(MainClientExec.java:236)
-          at org.apache.http.impl.execchain.ProtocolExec.execute(ProtocolExec.java:186)
-          at org.apache.http.impl.client.InternalHttpClient.doExecute(InternalHttpClient.java:185)
-          at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:83)
-          at org.apache.http.impl.client.CloseableHttpClient.execute(CloseableHttpClient.java:56)
-          at com.amazonaws.http.apache.client.impl.SdkHttpClient.execute(SdkHttpClient.java:72)
-          at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeOneRequest(AmazonHttpClient.java:1346)
-          at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeHelper(AmazonHttpClient.java:1157)
-          ... 15 more
+**Application Pod Logs:**
+```
+Standard Commons Logging discovery in action with spring-jcl: please remove commons-logging.jar from classpath in order to avoid potential conflicts
 
-- Istio-Ingress-Gateway logs : lookup istiod.istio-system.svc on 10.96.0.10:53: read udp 10.44.0.4:33126->10.96.0.10:53: read: connection refused"
-  2020-09-01T16:48:29.383977Z warn cache resource:default request:e0bdbb01-0c60-47bd-a9e1-e460b8c1da81 CSR failed with error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp: lookup istiod.istio-system.svc on 10.96.0.10:53: read udp 10.44.0.4:33126->10.96.0.10:53: read: connection refused", retry in 3200 millisec
-  2020-09-01T16:48:29.384167Z error citadelclient Failed to create certificate: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp: lookup istiod.istio-system.svc on 10.96.0.10:53: read udp 10.44.0.4:33126->10.96.0.10:53: read: connection refused"
+Exception in thread "main" com.amazonaws.SdkClientException: Unable to execute HTTP request: secretsmanager.ap-south-1.amazonaws.com
+  at com.amazonaws.http.AmazonHttpClient$RequestExecutor.handleRetryableException(AmazonHttpClient.java:1219)
+  at com.amazonaws.http.AmazonHttpClient$RequestExecutor.executeHelper(AmazonHttpClient.java:1165)
+  ...
+  at com.amazonaws.services.secretsmanager.AWSSecretsManagerClient.getSecretValue(AWSSecretsManagerClient.java:1177)
+  at com.notes.sawan.sawanApplication$Companion.getSecret(sawanApplication.kt:64)
+  at com.notes.sawan.sawanApplication$Companion.main(sawanApplication.kt:22)
+  at com.notes.sawan.sawanApplication.main(sawanApplication.kt)
 
-##### Explanation:
+Caused by: java.net.UnknownHostException: secretsmanager.ap-south-1.amazonaws.com
+```
 
-We are using `EKS for application deployment` and `Istio for Service Mesh` for internal communication. So Whenever we deploy application it is successfully deploying in one node where istio-ingress-gateway deployed but whenever application increase replica and deployed in another new node It is giving error in `crashloopbackoff` for all pods in another node and application not deploying after multiple restart.
+**Istio Ingress Gateway Logs:**
+```
+lookup istiod.istio-system.svc on 10.96.0.10:53: read udp 10.44.0.4:33126->10.96.0.10:53: read: connection refused
+2020-09-01T16:48:29.383977Z warn cache resource:default request:e0bdbb01-0c60-47bd-a9e1-e460b8c1da81 CSR failed with error: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing dial tcp: lookup istiod.istio-system.svc on 10.96.0.10:53: read udp 10.44.0.4:33126->10.96.0.10:53: read: connection refused"
+```
 
-##### Solution:
+### Explanation
 
-1. We need to implement `node intercommunication`.
+This issue occurs in EKS clusters using Istio for service mesh communication. Applications deploy successfully on nodes where the Istio Ingress Gateway is running, but when replicas are scheduled on different nodes, they enter a `CrashLoopBackOff` state and fail to start.
 
-2. We can allow all the `ports` which used in `istio implementation` in `node security group`.
-   
-   [Istio Implements Ports]([Istio / Application Requirements](https://istio.io/latest/docs/ops/deployment/requirements/))
+### Solution
 
-3. Allow or Create inbound rule for `node security group`.
-   
-   ```
-   from_port : all
-   to_port: all
-   protocol: custom
-   source: Self Node Security Group
-   Description: Allow Intercommunication between nodes 
-   ```
+**1. Enable node intercommunication**
+
+Nodes must be able to communicate with each other for Istio to function properly across the cluster.
+
+**2. Configure security group for Istio ports**
+
+Allow all ports used by Istio in the node security group.
+
+**Reference:** [Istio Application Requirements](https://istio.io/latest/docs/ops/deployment/requirements/)
+
+**3. Add inbound rule to node security group**
+
+Create an inbound rule that allows all traffic between nodes:
+
+```
+From Port: All
+To Port: All
+Protocol: All
+Source: <Self Node Security Group ID>
+Description: Allow inter-node communication for Istio
+```
+
+---
 
 ## Error
 
@@ -495,107 +547,137 @@ The issue arises due to there is `DCS security agent` running on all `ec2 worker
 
 ##### To stop `DCS agent` running process in EC2 instances . please run below command
 
+```bash
+ps -ef | grep -i sdcs
+systemctl stop sisipsdaemon
+systemctl disable sisipsdaemon
+systemctl stop sisidsdaemon
+systemctl disable sisidsdaemon
+systemctl stop sisanddaemon
+systemctl disable sisamddaemon
+systemctl stop sisipsutildaemon
+systemctl disable sisipsutildaemon
+ps -ef | grep -i sdcs
 ```
-ps -ef | grep -i sdcs; 
-systemctl stop sisipsdaemon; 
-systemctl disable sisipsdaemon; 
-systemctl stop sisidsdaemon; 
-systemctl disable sisidsdaemon; 
-systemctl stop sisanddaemon; 
-systemctl disable sisamddaemon; 
-systemctl stop sisipsutildaemon; 
-systemctl disable sisipsutildaemon;
-ps -ef | grep -i sdcs;
+
+---
+
+## Error 9: Docker SSL Certificate Verification Failure
+
+### Error Message
+```
+error:0A000086:SSL routines:tls_post_process_server_certificate:certificate verify failed:ssl/statem/statem_clnt.c:1889
 ```
 
-## Error
+### Explanation
+This error occurs during Docker image builds when attempting to install packages. SSL certificate verification fails during package downloads.
 
-docker error "error:0A000086:SSL routines:tls_post_process_server_certificate:certificate verify failed:ssl/statem/statem_clnt.c:1889" in dockerfile while downloading installing packages
+### Solution
 
-##### Explanation:
+Add the following lines to your Dockerfile to install and update CA certificates:
 
-We faced this while installing package in dockerimage
-
-##### Solution:
-
-```
+```dockerfile
 RUN apk add --no-cache \
     --repository http://dl-cdn.alpinelinux.org/alpine/v3.15/main \
     ca-certificates
 RUN update-ca-certificates
 ```
 
-## Error
+---
 
+## Error 10: Kubernetes Metrics Server Not Found
+
+### Error Message
+```
 failed to get cpu utilization: unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server could not find the requested resource (get pods.metrics.k8s.io)
-
 ```
+
+### Example Output
+```bash
 kubectl get hpa -n sawan-app | grep app-test
-app-test               Deployment/app-test              <unknown>/70%, <unknown>/70%   1         3         1          142d
+app-test    Deployment/app-test    <unknown>/70%, <unknown>/70%    1    3    1    142d
 ```
 
-##### Explanation:
+### Explanation
+This error occurs when attempting to retrieve CPU utilization metrics. The Kubernetes Metrics Server is either not installed or not properly configured in the cluster. The Metrics Server is essential for collecting resource metrics from kubelets and exposing them via the Metrics API for use by the Horizontal Pod Autoscaler (HPA) and other components.
 
-The error is occurring when trying to get CPU utilization.
-It's unable to fetch metrics from the resource metrics API.
-The server couldn't find the requested resource, specifically "pods.metrics.k8s.io".
-This error typically occurs when the Metrics Server is not properly installed or configured in your Kubernetes cluster. The Metrics Server is responsible for collecting resource metrics from kubelets and exposing them through the Metrics API for use by the Horizontal Pod Autoscaler and other components.
+### Solution
 
-##### Solution:
+**Step 1: Check API resources**
 
-- Check API resources: List all available API resources in your cluster:
-  
-  ```
-  kubectl api-resources
-  ```
+List all available API resources in your cluster:
 
-- Check API versions: List all available API versions:
-  
-  ```
-  kubectl api-versions | grep metrics.k8s.io
-  ```
+```bash
+kubectl api-resources
+```
 
-- `metrics.k8s.io/v1beta1` api missing in eks kubectl api-versions. EKS doesn't come with the Metrics Server pre-installed. You can install it using the following steps: a. Download the Metrics Server manifest:
-  
-  ```
-  wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
-  ```
+**Step 2: Check API versions**
 
-- Edit the file to add the necessary flags for EKS: Open the components.yaml file and find the Metrics Server deployment. Add these flags to the container args:
-  
-  ```
-  --kubelet-insecure-tls
-  --kubelet-preferred-address-types=InternalIP
-  ```
+List all available API versions:
 
-- Apply the manifest:
-  
-  ```
-  kubectl apply -f components.yaml
-  ```
+```bash
+kubectl api-versions | grep metrics.k8s.io
+```
 
-- Verify the installation: After installation, check if the Metrics Server pod is running:
-  
-  ```
-  kubectl get pods -n kube-system | grep metrics-server
-  ```
+**Step 3: Install Metrics Server**
 
-- Wait for the API to become available: It may take a few minutes for the API to become available. You can check its status with:
-  
-  ```
-  kubectl get apiservice v1beta1.metrics.k8s.io
-  ```
+If `metrics.k8s.io/v1beta1` is missing, install the Metrics Server. EKS doesn't come with it pre-installed.
 
-- Test the metrics API: Once available, try accessing the metrics:
-  
-  ```
-  kubectl top nodes
-  kubectl get hpa -n sawan-app | grep app-test
-  app-test               Deployment/app-test              3%/70%, 23%/70%   1         3         1          142d
-  ```
+a. Download the Metrics Server manifest:
 
-## Error
-Failed to connect to the host via ssh: ssh: connect to host 10.2.3.4 port 12323: Connection refused.
+```bash
+wget https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
+
+b. Edit the manifest for EKS compatibility:
+
+Open the `components.yaml` file and locate the Metrics Server deployment section. Add these flags to the container args:
+
+```yaml
+--kubelet-insecure-tls
+--kubelet-preferred-address-types=InternalIP
+```
+
+c. Apply the manifest:
+
+```bash
+kubectl apply -f components.yaml
+```
+
+**Step 4: Verify the installation**
+
+Check if the Metrics Server pod is running:
+
+```bash
+kubectl get pods -n kube-system | grep metrics-server
+```
+
+**Step 5: Wait for API availability**
+
+It may take a few minutes for the API to become available. Check its status:
+
+```bash
+kubectl get apiservice v1beta1.metrics.k8s.io
+```
+
+**Step 6: Test the metrics API**
+
+Once available, verify metrics are accessible:
+
+```bash
+kubectl top nodes
+kubectl get hpa -n sawan-app | grep app-test
+```
+
+Expected output:
+```
+app-test    Deployment/app-test    3%/70%, 23%/70%    1    3    1    142d
+```
+
+---
+
+## Error 11: SELinux Blocking SSH and Nginx Services\n\n### Error Messages\n```
+Failed to connect to the host via ssh: ssh: connect to host 10.2.3.4 port 12323: Connection refused
 Unable to start service nginx: Job for nginx.service failed. See "systemctl status nginx.service" and "journalctl -xe" for details.
 
 ##### Explaination:
@@ -791,8 +873,37 @@ When you switch to `enforcing` mode, SELinux may block certain actions if the po
 6. **Policy Management**: Adjust and create policies as needed to accommodate your system’s requirements.
 7. **Monitoring**: Continuously check logs and system behavior after switching to `enforcing` mode.
 
-By following these steps, you enable SELinux in enforcing mode and ensure that your system’s security policies are applied correctly. Migrating SELinux from `disabled` to `enforcing` mode brings significant security enhancements by applying mandatory access controls. However, it requires careful management of policies and configurations to ensure that all services and applications continue to function correctly. The migration process involves:
+By following these steps, you enable SELinux in enforcing mode and ensure that your system's security policies are applied correctly. Migrating SELinux from `disabled` to `enforcing` mode brings significant security enhancements by applying mandatory access controls. However, it requires careful management of policies and configurations to ensure that all services and applications continue to function correctly.
 
+---
+
+## Support This Guide
+
+If you found this troubleshooting guide helpful and it saved you time resolving your Cloud & DevOps issues, consider supporting this work!
+
+### ☕ Buy Me a Coffee
+
+Your support helps me continue creating and maintaining comprehensive technical documentation for the community.
+
+[![Buy Me a Coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/sawanchokso)
+
+**Alternative support options:**
+- ⭐ Star this guide and share it with your team
+- 💬 Contribute your own solutions via pull requests
+- 📝 Report issues or suggest improvements
+- 🤝 Share this resource with the DevOps community
+
+---
+
+### About This Guide
+
+This guide is actively maintained and updated with real-world solutions encountered in production environments. Your feedback and contributions help make it better for everyone.
+
+**Last Updated:** February 2026
+
+---
+
+*Thank you for using this guide! Happy troubleshooting! 🚀*
 
 
 
