@@ -1,0 +1,71 @@
+- 🚀 **Interview Guide & Career Success**
+  - [🏆 Master DevOps & Cloud Q&A Vault](Miscellaneous/DevOps+Cloud+Interview+QA.md)
+  - 📚 **Deep Dive by Technology**
+    - [AWS Architecture & Solutions](Miscellaneous/Interview-Guide/AWS-Amazon-Web-Services.md)
+    - [Azure Cloud & DevOps](Miscellaneous/Interview-Guide/Azure.md)
+    - [GCP Operations & Security](Miscellaneous/Interview-Guide/GCP-Google-Cloud-Platform.md)
+    - [Kubernetes (K8s) & Orchestration](Miscellaneous/Interview-Guide/Kubernetes-K8s.md)
+    - [Docker & Ecosystem](Miscellaneous/Interview-Guide/Docker.md)
+    - [Terraform & IaC Strategy](Miscellaneous/Interview-Guide/Terraform.md)
+    - [Ansible Config Management](Miscellaneous/Interview-Guide/Ansible.md)
+    - [Jenkins, CI/CD pipelines](Miscellaneous/Interview-Guide/Jenkins-CI-CD.md)
+    - [Git & Version Control](Miscellaneous/Interview-Guide/Git-Version-Control.md)
+    - [Networking & Security Routing](Miscellaneous/Interview-Guide/Networking.md)
+    - [Python for DevOps](Miscellaneous/Interview-Guide/Python-Programming.md)
+    - [Shell Scripting Scenarios](Miscellaneous/Interview-Guide/Shell-Scripting.md)
+    - [HashiCorp Nomad Details](Miscellaneous/Interview-Guide/HashiCorp-Nomad.md)
+  - 🚑 [Enterprise Error Tracker & Solutions](Miscellaneous/ErrorTrackerWithSolution.md)
+  - 📁 [Miscellaneous Assorted Documents](Miscellaneous/misc.md)
+
+- ☁️ **Cloud Platforms & Core**
+  - [Google Cloud Platform (GCP)](Cloud/GoogleCloudPlatform(GCP)Notes.md)
+  - [Microsoft Azure Cloud](Cloud/MicrosoftAzureCloud(Azure)Notes.md)
+  - [Amazon Web Services (AWS)](Cloud/AmazonWebServices(AWS)Notes.md)
+  - [Kubernetes (K8s) Notes](Cloud/Kubernetes(k8s)Notes.md)
+
+- ⚓ **Kubernetes & Containers Strategy**
+  - [EKS: NLB, ALB & Ingress Setup](Cloud/EKS+NLB+ALB+Ingress.md)
+  - [GKE: ALB & Ingress Setup](Cloud/GKE+ALB+Ingress.md)
+  - [K8s Expose API Server via Nginx Proxy](Cloud/Expose+Internally+KubeApiServer+ProxyNginx+Aws.md)
+  - [K8s HPA Replica Scaling & Automation](DevOps/k8sHpaAutomation.md)
+  - [GKE: Mount GCP Bucket via gcsfuse](Cloud/gcp+bucket+gke+gcsfuse+mount.md)
+  - [AWS EKS with Karpenter Autoscaling](Cloud/karpenter+aws+eks.md)
+  - [AWS Gateway API Controller on EKS](Cloud/gatewayAPI+EKS+AWS.md)
+  - [AWS Secrets Manager with K8s Pods](Cloud/SecreteManager+EKS+AWS.md)
+
+- 🏗️ **CI/CD & DevOps Automation**
+  - [Jenkins, Ansible, & Kubernetes CI/CD](DevOps/cicd+Jenkins+Ansible+k8s.md)
+  - [Jenkins EKS Agent (Containerd & DinD)](Cloud/Jenkins+eks+containerd+dind+agent.md)
+  - [Jenkins EKS Agent (Containerd & Nerdctl)](Cloud/Jenkins+eks+containerd+nerdctl+agent.md)
+  - [GitHub Actions Workflows](DevOps/GitHubAction.md)
+  - [Git Best Practices & Tricks](DevOps/Git.md)
+  - [Bitbucket Integrations](DevOps/bitbucket.md)
+  - [Bash Scripting Reference Guide](DevOps/bash+script+reference.md)
+  - [Linux Command Notes](DevOps/Linux+Command+Notes.md)
+  - [Windows Command Notes](DevOps/Windows+Command+Notes.md)
+
+- 🔥 **Architecture & Cloud Implementations**
+  - [AWS EC2 + SSM + Docker across Environments](Cloud/ec2+ssm+implementation.md)
+  - [AWS EC2 Nginx with CloudWatch Log Shipping](Cloud/ec2NginxLogsShipCloudWatch.md)
+  - [AWS Lambda Operational Autoscaling (EC2/RDS)](Cloud/lambda+ec2+rds+start+stop+aws.md)
+  - [GCP Cloud Migration & Transition Strategy](Cloud/CloudTransitionMigrationGCP.md)
+  - [Tuning Nginx Source Installation (v1.26.0)](DevOps/nginx-install-src-v1.26.0.md)
+  - [Advanced Nginx Troubleshooting](DevOps/nginx-troubleshooting.md)
+  - [Playwright E2E Code Docs](DevOps/PlaywrightDocs.md)
+  - [HashiCorp Nomad Orchestration](DevOps/nomad.md)
+
+- 🗄️ **Databases & Data Stores**
+  - [AWS Aurora RDS PG 14 to 16 Blue/Green Upgrade](Cloud/Upgrade_Aurora_RDS_14_to_16_BlueGreen.md)
+  - [AWS Aurora RDS PG 16 to 18 Blue/Green Upgrade](Cloud/Upgrade_Aurora_RDS_16_to_18_BlueGreen.md)
+  - [AWS Postgres DB IAM Authentication](Cloud/postgresql+database+authentication+AWS+IAM+role.md)
+  - [AWS ElastiCache Redis IAM Authentication](Cloud/elastiCache+database+authentication+AWS+IAM+Role.md)
+  - [SQL Server TDE Encrypted Database Restore](DevOps/restore+SQLServer+.bak+TDEencryption+database.md)
+  - [MS SQL Server Administrative DB Config](DevOps/ms+sql+server+db.md)
+  - [PostgreSQL RDBMS Quick Query Notes](DevOps/RDBMS+Postgresql+Query.md)
+
+- 🛠️ **Infrastructure as Code (IaC)**
+  - [Terraform Certification Q&A](IAC/terraform+certification+Q&A.md)
+
+- 📊 **Monitoring & Observability**
+  - [Linux Prometheus & Grafana Monitoring](Monitoring/Linux+Promotheus+Grafana.md)
+  - [Elasticsearch, Logstash, Filebeat & Kibana](Monitoring/Elasticsearch+Logstash+filebeat+Kibana.md)
