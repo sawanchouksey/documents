@@ -191,6 +191,50 @@ git mergetool (GUI interface for check conflict in flies)
 > 
 > git push origin pos-test
 
+### Git History Wipe (Destructive Cleanup)
+
+Use this process to permanently delete all commit history (e.g., to remove accidentally committed credentials from public history) and start fresh with a single clean commit.
+
+> [!CAUTION]
+> This is a **destructive operation**. It will erase all previous commit history locally and on the remote.
+
+1. **Create an orphan branch** (a new branch with no parents/history):
+   ```bash
+   git checkout --orphan fresh-main
+   ```
+
+2. **Stage all files** in the clean state:
+   ```bash
+   git add -A
+   ```
+
+3. **Create the new root commit**:
+   ```bash
+   git commit -m "Initial commit: Clean repository with all credentials removed"
+   ```
+
+4. **Delete the old main branch**:
+   ```bash
+   git branch -D main
+   ```
+
+5. **Rename the current branch to main**:
+   ```bash
+   git branch -m main
+   ```
+
+6. **Force push to overwrite remote history**:
+   ```bash
+   git push -f origin main
+   ```
+
+7. **Purge old data and reclaim space**:
+   ```bash
+   git reflog expire --expire=now --all
+   git gc --prune=now --aggressive
+   ```
+
+
 ### check logged in git user with git configuration
 
 ```
