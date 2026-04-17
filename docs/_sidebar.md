@@ -67,5 +67,6 @@
   - [Terraform Certification Q&A](IAC/terraform+certification+Q&A.md)
 
 - 📊 **Monitoring & Observability**
+  - [AzureBackupLogicApp_KQL_Queries_with_Dashboards](Cloud/AzureBackupLogicApp_KQL_Queries.md)
   - [Linux Prometheus & Grafana Monitoring](Monitoring/Linux+Promotheus+Grafana.md)
   - [Elasticsearch, Logstash, Filebeat & Kibana](Monitoring/Elasticsearch+Logstash+filebeat+Kibana.md)
